@@ -9,11 +9,13 @@ group :production do
   gem 'unicorn'
 end
 
+gem 'httparty'
 gem 'honeybadger'
 
 gem 'endpoint_base', github: 'spree/endpoint_base'
 
 group :development, :test do
+  gem 'shotgun'
   gem 'pry'
   gem 'pry-byebug'
 end

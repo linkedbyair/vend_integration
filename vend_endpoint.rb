@@ -11,14 +11,23 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     config.environment_name = ENV['RACK_ENV']
   end
 
-  post '/send_sms' do
-    body    = @payload['sms']['message']
-    phone   = @payload['sms']['phone']
-    from    = @payload['sms']['from']
+  post '/add_order' do
+    begin
+      client = Vend::Client.new(@payload['parameters']['vend_user'], @payload['parameters']['vend_password'])
+      @payload[:order].merge!(@payload['parameters'])
 
-    message = Message.new(@config, body, phone, from)
-    message.deliver
+      response = client.send_new_order(@payload[:order])
 
-    result 200, %{SMS "#{body}" sent to #{phone}}
+      code = 200
+      set_summary "The order #{@payload[:order][:number]} was sent to Vend POS."
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
   end
 end
