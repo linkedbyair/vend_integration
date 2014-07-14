@@ -13,11 +13,8 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post '/add_order' do
     begin
-      client = Vend::Client.new(@payload['parameters']['vend_user'], @payload['parameters']['vend_password'])
-      @payload[:order].merge!(@payload['parameters'])
-
+      client = Vend::Client.new(@payload['parameters']['site_id'], @payload['parameters']['vend_user'], @payload['parameters']['vend_password'])
       response = client.send_new_order(@payload[:order])
-
       code = 200
       set_summary "The order #{@payload[:order][:number]} was sent to Vend POS."
     rescue VendEndpointError => e
@@ -30,4 +27,10 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
     process_result code
   end
+
+  def error_notification(error)
+    log_exception(error)
+    set_summary "A Vend POS Endpoint error has ocurred: #{error.message}"
+  end
+
 end
