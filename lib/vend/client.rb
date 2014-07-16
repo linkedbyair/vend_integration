@@ -57,14 +57,7 @@ module Vend
     def product_id(product_id)
       return @products[product_id] if @products
 
-      options = {
-        headers: headers,
-        basic_auth: auth
-      }
-
-      response = self.class.get('/products', options)
-      validate_response(response)
-
+      response = retrieve_products
       @products = {}
       (response['products'] || []).each_with_index.map do |product, i|
         @products[product['handle']] = product['id']
@@ -72,7 +65,55 @@ module Vend
       @products[product_id]
     end
 
+
+    def get_products(poll_product_timestamp)
+      response  = retrieve_products(poll_product_timestamp)
+      products = []
+      (response['products'] || []).each_with_index.map do |product, i|
+        products << {
+            :id => product['id'],
+            'name'=> product['name'],
+            'source_id' =>  product['source_id'],
+            'sku'=> product['sku'],
+            'description'=> product['description'],
+            'price'=> product['price'],
+            'cost_price'=> 22.33,
+            'available_on'=> '2014-01-29T14=>01=>28.000Z',
+            'permalink'=> product['handle'],
+            'meta_keywords'=> product['tags'],
+            'shipping_category'=> 'Default',
+            'updated_at'=> product['updated_at'],
+            'taxons'=> [
+              [
+                'Brands',
+                product['brand_name']
+              ]
+            ],
+            'images'=> [
+              {
+                'url'=> product['image']
+              }
+            ]
+          }
+
+      end
+      products
+    end
+
     private
+
+    def retrieve_products(poll_product_timestamp)
+      options = {
+        headers: headers,
+        basic_auth: auth
+      }
+      options[:query] = {since: poll_product_timestamp} if poll_product_timestamp
+
+      response = self.class.get('/products', options)
+
+      validate_response(response)
+      response
+    end
 
     def validate_response(response)
       raise VendEndpointError, response if Vend::ErrorParser.response_has_errors?(response)

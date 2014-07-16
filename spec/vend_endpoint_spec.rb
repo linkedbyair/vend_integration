@@ -1,37 +1,54 @@
 require 'spec_helper'
 
 describe VendEndpoint do
-  # let(:config)  { { 'twilio_account_sid' => 'ABC', 'twilio_auth_token' => 'ABC' } }
+  def app
+    VendEndpoint
+  end
 
-  # let(:customer_phone) { '+55321' }
-  # let(:alt_phone)      { '+5512341234' }
-  # let(:client)         { double('Twilio client').as_null_object }
+  def auth
+    {'HTTP_X_AUGURY_TOKEN' => '6a204bd89f3c8348afd5c77c717a097a', "CONTENT_TYPE" => "application/json"}
+  end
 
-  # before do
-  #   Twilio::REST::Client.stub(:new).with('ABC', 'ABC').and_return(client)
-  # end
+  let(:order) { Factories.order }
+  let(:original) { Factories.original }
+  let(:params) { Factories.parameters }
 
-  # context 'when SMS' do
-  #   let(:sms) do
-  #     { message: 'Howdy!', phone: customer_phone, from: alt_phone }
-  #   end
+  describe '/add_order' do
+    context 'success' do
+      it 'imports new orders' do
+        message = {
+          request_id: '123456',
+          order: order,
+          parameters: params
+        }.to_json
 
-  #   let(:request) { { request_id: '1234567',
-  #                     sms: sms,
-  #                     parameters: config } }
+        VCR.use_cassette('import_new_order') do
+          post '/add_order', message, auth
+          last_response.should == ""
+          last_response.status.should == 200
+          last_response.body.should match /was sent to Jirafe/
+        end
+      end
+    end
 
-  #   describe '/send_sms' do
-  #     it 'sends a SMS' do
-  #       expect(client).to receive(:create).
-  #         with(from: alt_phone,
-  #              to: customer_phone,
-  #              body: 'Howdy!')
+    # context 'failure' do
+    #   it 'returns error details 'do
+    #     order = Factories.order.merge({ :number => nil })
 
-  #         post '/send_sms', request.to_json, auth
+    #     message = {
+    #       request_id: '123456',
+    #       order: order,
+    #       parameters: params
+    #     }.to_json
 
-  #         expect(last_response).to be_ok
-  #         expect(json_response[:summary]).to eq %{SMS "Howdy!" sent to #{customer_phone}}
-  #     end
-  #   end
-  # end
+    #     VCR.use_cassette('import_order_fail') do
+    #       post '/add_order', message, auth
+    #       last_response.status.should == 500
+    #       last_response.body.should match /None is not of type/
+    #     end
+    #   end
+    # end
+  end
+
+
 end
