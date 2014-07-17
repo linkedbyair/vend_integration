@@ -13,7 +13,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post %r{(add_order|update_order)$} do
     begin
-      client                      = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      client                      = Vend::Client.new(@config['vend_site_id'], @config['vend_user'], @config['vend_password'])
       @payload[:order][:register] = @config['vend_register']
       response                    = client.send_order(@payload[:order])
       code                        = 200
@@ -31,7 +31,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post '/get_orders' do
     begin
-      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      client = Vend::Client.new(@config['vend_site_id'], @config['vend_user'], @config['vend_password'])
       orders = client.get_orders(@config['vend_poll_order_timestamp'])
 
       orders.each do |order|
@@ -53,7 +53,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post '/get_products' do
     begin
-      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      client = Vend::Client.new(@config['vend_site_id'], @config['vend_user'], @config['vend_password'])
       products = client.get_products(@config['vend_poll_product_timestamp'])
 
       products.each do |product|
@@ -75,7 +75,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post '/get_inventory' do
     begin
-      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      client = Vend::Client.new(@config['vend_site_id'], @config['vend_user'], @config['vend_password'])
       inventories = client.get_inventories(@config['vend_poll_inventory_timestamp'])
 
       inventories.each do |inventory|
@@ -97,7 +97,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post '/get_customers' do
     begin
-      client    = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      client    = Vend::Client.new(@config['vend_site_id'], @config['vend_user'], @config['vend_password'])
       customers = client.get_customers(@config['vend_poll_customer_timestamp'])
 
       customers.each do |customer|
@@ -119,7 +119,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post %r{(add_customer|update_customer)$} do
     begin
-      client   = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      client   = Vend::Client.new(@config['vend_site_id'], @config['vend_user'], @config['vend_password'])
       response = client.send_customer(@payload[:customer])
       code     = 200
       set_summary "The customer #{@payload[:customer][:id]} was sent to Vend POS."

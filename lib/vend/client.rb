@@ -74,7 +74,7 @@ module Vend
 
       inventories = []
       (response['products'] || []).each_with_index.map do |product, i|
-        product['inventory'].each do | inventory |
+        (product['inventory'] || []).each do | inventory |
           inventories << {
             :id          => inventory['outlet_id'],
             "location"   => inventory['outlet_name'],
@@ -191,7 +191,6 @@ module Vend
       options[:query][:email] = email if email
 
       response = self.class.get('/customers', options)
-      puts response.inspect
       validate_response(response)
     end
 
