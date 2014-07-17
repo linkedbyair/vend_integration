@@ -13,10 +13,10 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post %r{(add_order|update_order)$} do
     begin
-      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      client                      = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
       @payload[:order][:register] = @config['vend_register']
-      response = client.send_new_order(@payload[:order])
-      code = 200
+      response                    = client.send_order(@payload[:order])
+      code                        = 200
       set_summary "The order #{@payload[:order][:number]} was sent to Vend POS."
     rescue VendEndpointError => e
       code = 500
@@ -97,7 +97,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post '/get_customer' do
     begin
-      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      client    = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
       customers = client.get_customers(@config['vend_poll_customer_timestamp'])
 
       customers.each do |customer|
@@ -119,9 +119,9 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post %r{(add_customer|update_customer)$} do
     begin
-      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      client   = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
       response = client.send_customer(@payload[:customer])
-      code = 200
+      code     = 200
       set_summary "The customer #{@payload[:customer][:id]} was sent to Vend POS."
     rescue VendEndpointError => e
       code = 500

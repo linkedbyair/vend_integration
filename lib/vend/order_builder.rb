@@ -3,7 +3,7 @@ module Vend
     class << self
       def order_placed(client, payload)
         hash = {
-            'register_id'            => payload['register'],
+            'register_id'            => client.register_id(payload['register']),
             'customer_id'            => customer(client, payload),
             'sale_date'              => payload['placed_on'],
             'total_price'            => payload['totals']['item'].to_f,
@@ -65,8 +65,6 @@ module Vend
         }
       end
 
-      private
-
       def parse_items(vend_order)
         (vend_order['register_sale_products'] || []).each_with_index.map do |line_item, i|
           {
@@ -100,8 +98,10 @@ module Vend
         end
       end
 
+      private
+
       def customer(client, payload)
-        customer = client.customer_by_email(payload['email'])
+        customer = client.retrieve_customers(nil, payload['email'])
 
         if customer['customers'][0].nil?
           customer = client.send_customer(build_customer_based_on_order(payload))
