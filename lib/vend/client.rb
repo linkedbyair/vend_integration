@@ -191,6 +191,7 @@ module Vend
       options[:query][:email] = email if email
 
       response = self.class.get('/customers', options)
+      puts response.inspect
       validate_response(response)
     end
 

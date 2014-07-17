@@ -51,7 +51,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
-  post '/get_product' do
+  post '/get_products' do
     begin
       client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
       products = client.get_products(@config['vend_poll_product_timestamp'])
@@ -95,7 +95,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
-  post '/get_customer' do
+  post '/get_customers' do
     begin
       client    = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
       customers = client.get_customers(@config['vend_poll_customer_timestamp'])
