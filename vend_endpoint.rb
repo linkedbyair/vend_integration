@@ -11,9 +11,10 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     config.environment_name = ENV['RACK_ENV']
   end
 
-  post '/add_order' do
+  post %r{(add_order|update_order)$} do
     begin
       client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      @payload[:order][:register] = @config['vend_register']
       response = client.send_new_order(@payload[:order])
       code = 200
       set_summary "The order #{@payload[:order][:number]} was sent to Vend POS."
@@ -28,17 +29,17 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
-  post '/get_product' do
+  post '/get_orders' do
     begin
       client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
-      products = client.get_products(@config['vend_hehehepoll_product_timestamp'])
+      orders = client.get_orders(@config['vend_poll_order_timestamp'])
 
-      products.each do |product|
-        add_object "product", product
+      orders.each do |order|
+        add_object "order", order
       end
 
       code = 200
-      set_summary "#{products.size} products was retrieved from Vend POS." if products.any?
+      set_summary "#{orders.size} orders were retrieved from Vend POS." if orders.any?
     rescue VendEndpointError => e
       code = 500
       set_summary "Validation error has ocurred: #{e.message}"
@@ -49,6 +50,90 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
     process_result code
   end
+
+  post '/get_product' do
+    begin
+      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      products = client.get_products(@config['vend_poll_product_timestamp'])
+
+      products.each do |product|
+        add_object "product", product
+      end
+
+      code = 200
+      set_summary "#{products.size} products were retrieved from Vend POS." if products.any?
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+
+  post '/get_inventory' do
+    begin
+      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      inventories = client.get_inventories(@config['vend_poll_inventory_timestamp'])
+
+      inventories.each do |inventory|
+        add_object "inventory", inventory
+      end
+
+      code = 200
+      set_summary "#{inventories.size} inventories were retrieved from Vend POS." if inventories.any?
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+
+  post '/get_customer' do
+    begin
+      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      customers = client.get_customers(@config['vend_poll_customer_timestamp'])
+
+      customers.each do |customer|
+        add_object "customer", customer
+      end
+
+      code = 200
+      set_summary "#{customers.size} customers were retrieved from Vend POS." if customers.any?
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+
+  post %r{(add_customer|update_customer)$} do
+    begin
+      client = Vend::Client.new(@config['site_id'], @config['vend_user'], @config['vend_password'])
+      response = client.send_customer(@payload[:customer])
+      code = 200
+      set_summary "The customer #{@payload[:customer][:id]} was sent to Vend POS."
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+
 
   def error_notification(error)
     log_exception(error)

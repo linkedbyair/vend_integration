@@ -25,16 +25,21 @@ module Vend
       validate_response(response)
     end
 
-    def customer_by_email(email)
+    def send_customer(payload)
+      customer_hash   = Vend::CustomerBuilder.build_customer(self, payload)
+
       options = {
         headers: headers,
         basic_auth: auth,
-        query: {email: email}
+        body: customer_hash.to_json
       }
 
-      response = self.class.get('/customers', options)
+      response = self.class.post('/customers', options)
       validate_response(response)
-      response
+    end
+
+    def customer_by_email(email)
+      retrieve_customers(nil, email)
     end
 
     def payment_type_id(payment_method)
@@ -100,7 +105,90 @@ module Vend
       products
     end
 
+
+    def get_inventories(poll_inventory_timestamp)
+      response  = retrieve_products(poll_inventory_timestamp)
+
+      inventories = []
+      (response['products'] || []).each_with_index.map do |product, i|
+        product['inventory'].each do | inventory |
+          inventories << {
+            :id => inventory['outlet_id'],
+            "location"=> inventory['outlet_name'],
+            "product_id"=> product['id'],
+            "quantity"=> inventory['count']
+          }
+        end
+      end
+      inventories
+    end
+
+    def get_customers(poll_customer_timestamp)
+      response  = retrieve_customers(poll_customer_timestamp, nil)
+
+      customers = []
+      (response['customers'] || []).each_with_index.map do |customer, i|
+        customers << {
+          :id => customer['id'],
+          'firstname'=> first_name(customer['name']),
+          'lastname'=> last_name(customer['name']),
+          'email'=> customer['email'],
+          'shipping_address'=> {
+            'address1'=> customer['physical_address1'],
+            'address2'=> customer['physical_address2'],
+            'zipcode'=> customer['physical_postcode'],
+            'city'=> customer['physical_city'],
+            'state'=> customer['physical_state'],
+            'country'=> customer['physical_country_id'],
+            'phone' =>  customer['phone']
+          },
+          'billing_address'=> {
+            'address1'=> customer['postal_address1'],
+            'address2'=> customer['postal_address2'],
+            'zipcode'=> customer['postal_postcode'],
+            'city'=> customer['postal_city'],
+            'state'=> customer['postal_state'],
+            'country'=> customer['postal_country_id'],
+            'phone' =>  customer['phone']
+          }
+        }
+      end
+      customers
+    end
+
+    def get_orders(poll_order_timestamp)
+      options = {
+        headers: headers,
+        basic_auth: auth
+      }
+      options[:query] = {since: poll_order_timestamp} if poll_order_timestamp
+
+      response = self.class.get('/register_sales', options)
+
+      validate_response(response)
+
+      orders = []
+      (response['register_sales'] || []).each_with_index.map do |order, i|
+        orders << Vend::OrderBuilder.parse_order(order)
+      end
+      orders
+    end
+
+
     private
+
+    def retrieve_customers(poll_customer_timestamp, email)
+      options = {
+        headers: headers,
+        basic_auth: auth,
+      }
+      options[:query] = {} if poll_customer_timestamp || email
+      options[:query][:since] = poll_customer_timestamp if poll_customer_timestamp
+      options[:query][:email] = email if email
+
+      response = self.class.get('/customers', options)
+      validate_response(response)
+    end
 
     def retrieve_products(poll_product_timestamp)
       options = {
@@ -112,12 +200,19 @@ module Vend
       response = self.class.get('/products', options)
 
       validate_response(response)
-      response
     end
 
     def validate_response(response)
       raise VendEndpointError, response if Vend::ErrorParser.response_has_errors?(response)
-      true
+      response
+    end
+
+    def first_name(name)
+      name.split(' ')[0]
+    end
+
+    def last_name(name)
+      name.split(' ').drop(1).join(' ')
     end
   end
 end
