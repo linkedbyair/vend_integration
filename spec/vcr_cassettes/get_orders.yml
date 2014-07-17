@@ -1,0 +1,742 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://reinaldo%40spreecommerce.com:spree123@reinaldosports.vendhq.com/api/register_sales
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 17 Jul 2014 18:47:59 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=31; includeSubDomains
+      Set-Cookie:
+      - vend=UxH7NHBBbYnmM5anK6IwBxbMjGH:2Ivs4GApTzIm6h9rkAdDRnWmyMM; expires=Thu,
+        24-Jul-2014 18:47:59 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - maroon
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "register_sales"    :   [    {   "id":  "066bec43-0d4c-11e4-a0f5-b8ca3a64f8f4",
+                "register_id":          "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "market_id":            "3",
+                "customer_id":          "04ef6538-0d4c-11e4-a0f5-b8ca3a64f8f4",
+                "customer_name":        "Joe Smith",
+                "customer":             {
+                "id":               "04ef6538-0d4c-11e4-a0f5-b8ca3a64f8f4",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-WJ36",
+                "customer_group_id":         "32965c4b-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "paco+1@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-07-17 00:48:07",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "0.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "paco+1@spreecommerce.com"
+                    }
+                },
+                "user_id":              "32bd1eda-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "user_name":            "reinaldo@spreecommerce.com",
+                "sale_date":            "2014-02-03 17:29:15",
+                "created_at":            "2014-07-17 00:48:10",
+                "updated_at":            "2014-07-17 00:48:10",
+                "total_price":          200,
+                "total_cost":           0,
+                "total_tax":            10,
+                "tax_name":             "No Tax",
+                "note":                 "",
+                "status":               "complete",
+                "short_code":           "dipyyc",
+                "invoice_number":       "32a98839-08f5-11e4-a",
+                "register_sale_products": [        {
+                     "id"                       :"067eaafe-0d4c-11e4-a0f5-b8ca3a64f8f4",
+                     "product_id"               :"32a98839-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "register_id"              :"32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "sequence"                 :"0",
+                     "handle"                   :"coffee",
+                     "sku"                      :"coffee-hot",
+                     "name"                     :"Coffee (Demo)",
+                     "quantity"                 : 2,
+                     "price"                    : 100,
+                     "price_set"                : 0,
+                     "discount"                 : 0,
+                     "loyalty_value"            : 0,
+                     "tax"                      : 0,
+                     "tax_id"                   : "329bcb37-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "tax_name"                 : "No Tax",
+                     "tax_rate"                 : 0,
+                     "tax_total"                 : 0,
+                     "price_total"               : 200,
+                     "display_retail_price_tax_inclusive"               : "0",
+                     "status"                   : "CONFIRMED"
+
+                                  ,
+                     "attributes" : [
+                        {
+                            "name" : "line_note",
+                            "value" : "Spree T-Shirt"                }
+                    ]
+                            }             ],
+                "totals":           { "total_tax"        : 10,
+                                      "total_price"      : 200,
+                                      "total_payment"        : 220,
+                                      "total_to_pay"          : -10                            },
+                "register_sale_payments" :        [      {
+                    "id"                       : "06829884-0d4c-11e4-a0f5-b8ca3a64f8f4",
+                    "payment_type_id"          : "3",
+                    "register_id"              : "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                    "retailer_payment_type_id" : "6530dbf7-0b73-11e4-a0f5-b8ca3a64f8f4",
+                    "name"                     : "Credit Card",
+                                "label"                    : "Credit Card",
+                    "payment_date"             : "2014-02-03 17:29:15",
+                    "amount"                   : 220                }    ]
+                                ,"taxes": [
+                                                    {
+                            "id": "329ca989-08f5-11e4-a0f5-b8ca3a64f8f4",
+                            "tax": 0,
+                            "name": "No Tax",
+                            "rate": 0                }
+                                            ]
+                     },            {   "id":  "R154085346205226",
+                "register_id":          "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "market_id":            "3",
+                "customer_id":          "b8ca3a64-f8a8-11e4-e0f5-0da52709d1e1",
+                "customer_name":        "Joe Smith",
+                "customer":             {
+                "id":               "b8ca3a64-f8a8-11e4-e0f5-0da52709d1e1",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-36Z3",
+                "customer_group_id":         "32965c4b-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "paco+1@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-07-17 11:26:10",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "0.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "paco+1@spreecommerce.com"
+                    }
+                },
+                "user_id":              "32bd1eda-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "user_name":            "reinaldo@spreecommerce.com",
+                "sale_date":            "2014-02-03 17:29:15",
+                "created_at":            "2014-07-17 02:16:13",
+                "updated_at":            "2014-07-17 11:26:12",
+                "total_price":          200,
+                "total_cost":           0,
+                "total_tax":            10,
+                "tax_name":             "No Tax",
+                "note":                 "",
+                "status":               "complete",
+                "short_code":           "gknmly",
+                "invoice_number":       "32a98839-08f5-11e4-a",
+                "register_sale_products": [        {
+                     "id"                       :"b8ca3a64-f8a8-11e4-e0f5-0da528618284",
+                     "product_id"               :"32a98839-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "register_id"              :"32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "sequence"                 :"0",
+                     "handle"                   :"coffee",
+                     "sku"                      :"coffee-hot",
+                     "name"                     :"Coffee (Demo)",
+                     "quantity"                 : 2,
+                     "price"                    : 100,
+                     "price_set"                : 0,
+                     "discount"                 : 0,
+                     "loyalty_value"            : 0,
+                     "tax"                      : 0,
+                     "tax_id"                   : "329bcb37-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "tax_name"                 : "No Tax",
+                     "tax_rate"                 : 0,
+                     "tax_total"                 : 0,
+                     "price_total"               : 200,
+                     "display_retail_price_tax_inclusive"               : "0",
+                     "status"                   : "CONFIRMED"
+
+                                  ,
+                     "attributes" : [
+                        {
+                            "name" : "line_note",
+                            "value" : "Spree T-Shirt"                }
+                    ]
+                            }             ],
+                "totals":           { "total_tax"        : 10,
+                                      "total_price"      : 200,
+                                      "total_payment"        : 880,
+                                      "total_to_pay"          : -670                            },
+                "register_sale_payments" :        [      {
+                    "id"                       : "53645a7c-0d58-11e4-a0f5-b8ca3a64f8f4",
+                    "payment_type_id"          : "3",
+                    "register_id"              : "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                    "retailer_payment_type_id" : "6530dbf7-0b73-11e4-a0f5-b8ca3a64f8f4",
+                    "name"                     : "Credit Card",
+                                "label"                    : "Credit Card",
+                    "payment_date"             : "2014-02-03 17:29:15",
+                    "amount"                   : 220                },          {
+                    "id"                       : "b8ca3a64-f8a8-11e4-e0f5-0da500aef4fa",
+                    "payment_type_id"          : "3",
+                    "register_id"              : "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                    "retailer_payment_type_id" : "6530dbf7-0b73-11e4-a0f5-b8ca3a64f8f4",
+                    "name"                     : "Credit Card",
+                                "label"                    : "Credit Card",
+                    "payment_date"             : "2014-02-03 17:29:15",
+                    "amount"                   : 220                },          {
+                    "id"                       : "b8ca3a64-f8a8-11e4-e0f5-0da5158ebd54",
+                    "payment_type_id"          : "3",
+                    "register_id"              : "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                    "retailer_payment_type_id" : "6530dbf7-0b73-11e4-a0f5-b8ca3a64f8f4",
+                    "name"                     : "Credit Card",
+                                "label"                    : "Credit Card",
+                    "payment_date"             : "2014-02-03 17:29:15",
+                    "amount"                   : 220                },          {
+                    "id"                       : "b8ca3a64-f8a8-11e4-e0f5-0da528661b86",
+                    "payment_type_id"          : "3",
+                    "register_id"              : "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                    "retailer_payment_type_id" : "6530dbf7-0b73-11e4-a0f5-b8ca3a64f8f4",
+                    "name"                     : "Credit Card",
+                                "label"                    : "Credit Card",
+                    "payment_date"             : "2014-02-03 17:29:15",
+                    "amount"                   : 220                }    ]
+                                ,"taxes": [
+                                                    {
+                            "id": "329ca989-08f5-11e4-a0f5-b8ca3a64f8f4",
+                            "tax": 0,
+                            "name": "No Tax",
+                            "rate": 0                }
+                                            ]
+                     },            {   "id":  "R154085346205227",
+                "register_id":          "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "market_id":            "3",
+                "customer_id":          "b8ca3a64-f8a8-11e4-e0f5-0da5791f0940",
+                "customer_name":        "Joe Smith",
+                "customer":             {
+                "id":               "b8ca3a64-f8a8-11e4-e0f5-0da5791f0940",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-77S7",
+                "customer_group_id":         "32965c4b-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "paco+1@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-07-17 11:28:28",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "0.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "paco+1@spreecommerce.com"
+                    }
+                },
+                "user_id":              "32bd1eda-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "user_name":            "reinaldo@spreecommerce.com",
+                "sale_date":            "2014-02-03 17:29:15",
+                "created_at":            "2014-07-17 11:28:30",
+                "updated_at":            "2014-07-17 11:28:30",
+                "total_price":          200,
+                "total_cost":           0,
+                "total_tax":            10,
+                "tax_name":             "No Tax",
+                "note":                 "",
+                "status":               "complete",
+                "short_code":           "embbab",
+                "invoice_number":       "32a98839-08f5-11e4-a",
+                "register_sale_products": [        {
+                     "id"                       :"b8ca3a64-f8a8-11e4-e0f5-0da57a6363f1",
+                     "product_id"               :"32a98839-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "register_id"              :"32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "sequence"                 :"0",
+                     "handle"                   :"coffee",
+                     "sku"                      :"coffee-hot",
+                     "name"                     :"Coffee (Demo)",
+                     "quantity"                 : 2,
+                     "price"                    : 100,
+                     "price_set"                : 0,
+                     "discount"                 : 0,
+                     "loyalty_value"            : 0,
+                     "tax"                      : 0,
+                     "tax_id"                   : "329bcb37-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "tax_name"                 : "No Tax",
+                     "tax_rate"                 : 0,
+                     "tax_total"                 : 0,
+                     "price_total"               : 200,
+                     "display_retail_price_tax_inclusive"               : "0",
+                     "status"                   : "CONFIRMED"
+
+                                  ,
+                     "attributes" : [
+                        {
+                            "name" : "line_note",
+                            "value" : "Spree T-Shirt"                }
+                    ]
+                            }             ],
+                "totals":           { "total_tax"        : 10,
+                                      "total_price"      : 200,
+                                      "total_payment"        : 220,
+                                      "total_to_pay"          : -10                            },
+                "register_sale_payments" :        [      {
+                    "id"                       : "b8ca3a64-f8a8-11e4-e0f5-0da57a65995f",
+                    "payment_type_id"          : "3",
+                    "register_id"              : "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                    "retailer_payment_type_id" : "6530dbf7-0b73-11e4-a0f5-b8ca3a64f8f4",
+                    "name"                     : "Credit Card",
+                                "label"                    : "Credit Card",
+                    "payment_date"             : "2014-02-03 17:29:15",
+                    "amount"                   : 220                }    ]
+                                ,"taxes": [
+                                                    {
+                            "id": "329ca989-08f5-11e4-a0f5-b8ca3a64f8f4",
+                            "tax": 0,
+                            "name": "No Tax",
+                            "rate": 0                }
+                                            ]
+                     },            {   "id":  "R154085346205228",
+                "register_id":          "1f46d8a5-0d4d-11e4-a0f5-b8ca3a64f8f4",
+                "market_id":            "3",
+                "customer_id":          "b8ca3a64-f8a8-11e4-e0f5-0da5a5d01b49",
+                "customer_name":        "Joe Smith",
+                "customer":             {
+                "id":               "b8ca3a64-f8a8-11e4-e0f5-0da5a5d01b49",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8L7M",
+                "customer_group_id":         "32965c4b-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "paco+1@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-07-17 11:29:43",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "0.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "paco+1@spreecommerce.com"
+                    }
+                },
+                "user_id":              "32bd1eda-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "user_name":            "reinaldo@spreecommerce.com",
+                "sale_date":            "2014-02-03 17:29:15",
+                "created_at":            "2014-07-17 11:29:45",
+                "updated_at":            "2014-07-17 11:29:45",
+                "total_price":          200,
+                "total_cost":           0,
+                "total_tax":            10,
+                "tax_name":             "No Tax",
+                "note":                 "",
+                "status":               "complete",
+                "short_code":           "iahugc",
+                "invoice_number":       "32a98839-08f5-11e4-a",
+                "register_sale_products": [        {
+                     "id"                       :"b8ca3a64-f8a8-11e4-e0f5-0da5a71a2825",
+                     "product_id"               :"32a98839-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "register_id"              :"1f46d8a5-0d4d-11e4-a0f5-b8ca3a64f8f4",
+                     "sequence"                 :"0",
+                     "handle"                   :"coffee",
+                     "sku"                      :"coffee-hot",
+                     "name"                     :"Coffee (Demo)",
+                     "quantity"                 : 2,
+                     "price"                    : 100,
+                     "price_set"                : 0,
+                     "discount"                 : 0,
+                     "loyalty_value"            : 0,
+                     "tax"                      : 0,
+                     "tax_id"                   : "329bcb37-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "tax_name"                 : "No Tax",
+                     "tax_rate"                 : 0,
+                     "tax_total"                 : 0,
+                     "price_total"               : 200,
+                     "display_retail_price_tax_inclusive"               : "0",
+                     "status"                   : "CONFIRMED"
+
+                                  ,
+                     "attributes" : [
+                        {
+                            "name" : "line_note",
+                            "value" : "Spree T-Shirt"                }
+                    ]
+                            }             ],
+                "totals":           { "total_tax"        : 10,
+                                      "total_price"      : 200,
+                                      "total_payment"        : 220,
+                                      "total_to_pay"          : -10                            },
+                "register_sale_payments" :        [      {
+                    "id"                       : "b8ca3a64-f8a8-11e4-e0f5-0da5a71cb254",
+                    "payment_type_id"          : "3",
+                    "register_id"              : "1f46d8a5-0d4d-11e4-a0f5-b8ca3a64f8f4",
+                    "retailer_payment_type_id" : "6530dbf7-0b73-11e4-a0f5-b8ca3a64f8f4",
+                    "name"                     : "Credit Card",
+                                "label"                    : "Credit Card",
+                    "payment_date"             : "2014-02-03 17:29:15",
+                    "amount"                   : 220                }    ]
+                                ,"taxes": [
+                                                    {
+                            "id": "329ca989-08f5-11e4-a0f5-b8ca3a64f8f4",
+                            "tax": 0,
+                            "name": "No Tax",
+                            "rate": 0                }
+                                            ]
+                     },            {   "id":  "R6666666646205228",
+                "register_id":          "1f46d8a5-0d4d-11e4-a0f5-b8ca3a64f8f4",
+                "market_id":            "3",
+                "customer_id":          "b8ca3a64-f8a8-11e4-e0f5-0ddb9c71f64b",
+                "customer_name":        "Joe Smith",
+                "customer":             {
+                "id":               "b8ca3a64-f8a8-11e4-e0f5-0ddb9c71f64b",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-W8L3",
+                "customer_group_id":         "32965c4b-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "paco+1@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-07-17 17:56:00",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "0.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "paco+1@spreecommerce.com"
+                    }
+                },
+                "user_id":              "32bd1eda-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "user_name":            "reinaldo@spreecommerce.com",
+                "sale_date":            "2014-02-03 17:29:15",
+                "created_at":            "2014-07-17 17:56:02",
+                "updated_at":            "2014-07-17 17:56:02",
+                "total_price":          200,
+                "total_cost":           0,
+                "total_tax":            10,
+                "tax_name":             "No Tax",
+                "note":                 "",
+                "status":               "complete",
+                "short_code":           "nppomv",
+                "invoice_number":       "32a98839-08f5-11e4-a",
+                "register_sale_products": [        {
+                     "id"                       :"b8ca3a64-f8a8-11e4-e0f5-0ddb9db9e945",
+                     "product_id"               :"32a98839-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "register_id"              :"1f46d8a5-0d4d-11e4-a0f5-b8ca3a64f8f4",
+                     "sequence"                 :"0",
+                     "handle"                   :"coffee",
+                     "sku"                      :"coffee-hot",
+                     "name"                     :"Coffee (Demo)",
+                     "quantity"                 : 2,
+                     "price"                    : 100,
+                     "price_set"                : 0,
+                     "discount"                 : 0,
+                     "loyalty_value"            : 0,
+                     "tax"                      : 0,
+                     "tax_id"                   : "329bcb37-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "tax_name"                 : "No Tax",
+                     "tax_rate"                 : 0,
+                     "tax_total"                 : 0,
+                     "price_total"               : 200,
+                     "display_retail_price_tax_inclusive"               : "0",
+                     "status"                   : "CONFIRMED"
+
+                                  ,
+                     "attributes" : [
+                        {
+                            "name" : "line_note",
+                            "value" : "Spree T-Shirt"                }
+                    ]
+                            }             ],
+                "totals":           { "total_tax"        : 10,
+                                      "total_price"      : 200,
+                                      "total_payment"        : 220,
+                                      "total_to_pay"          : -10                            },
+                "register_sale_payments" :        [      {
+                    "id"                       : "b8ca3a64-f8a8-11e4-e0f5-0ddb9dbd724a",
+                    "payment_type_id"          : "3",
+                    "register_id"              : "1f46d8a5-0d4d-11e4-a0f5-b8ca3a64f8f4",
+                    "retailer_payment_type_id" : "6530dbf7-0b73-11e4-a0f5-b8ca3a64f8f4",
+                    "name"                     : "Credit Card",
+                                "label"                    : "Credit Card",
+                    "payment_date"             : "2014-02-03 17:29:15",
+                    "amount"                   : 220                }    ]
+                                ,"taxes": [
+                                                    {
+                            "id": "329ca989-08f5-11e4-a0f5-b8ca3a64f8f4",
+                            "tax": 0,
+                            "name": "No Tax",
+                            "rate": 0                }
+                                            ]
+                     },            {   "id":  "e07287fa-0d4b-11e4-a0f5-b8ca3a64f8f4",
+                "register_id":          "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "market_id":            "3",
+                "customer_id":          "df08707a-0d4b-11e4-a0f5-b8ca3a64f8f4",
+                "customer_name":        "Joe Smith",
+                "customer":             {
+                "id":               "df08707a-0d4b-11e4-a0f5-b8ca3a64f8f4",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-C5A2",
+                "customer_group_id":         "32965c4b-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "paco+1@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-07-17 00:47:04",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "0.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "paco+1@spreecommerce.com"
+                    }
+                },
+                "user_id":              "32bd1eda-08f5-11e4-a0f5-b8ca3a64f8f4",
+                "user_name":            "reinaldo@spreecommerce.com",
+                "sale_date":            "2014-02-03 17:29:15",
+                "created_at":            "2014-07-17 00:47:06",
+                "updated_at":            "2014-07-17 00:47:06",
+                "total_price":          200,
+                "total_cost":           0,
+                "total_tax":            10,
+                "tax_name":             "No Tax",
+                "note":                 "",
+                "status":               "complete",
+                "short_code":           "efqqht",
+                "invoice_number":       "32a98839-08f5-11e4-a",
+                "register_sale_products": [        {
+                     "id"                       :"e08a715a-0d4b-11e4-a0f5-b8ca3a64f8f4",
+                     "product_id"               :"32a98839-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "register_id"              :"32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "sequence"                 :"0",
+                     "handle"                   :"coffee",
+                     "sku"                      :"coffee-hot",
+                     "name"                     :"Coffee (Demo)",
+                     "quantity"                 : 2,
+                     "price"                    : 100,
+                     "price_set"                : 0,
+                     "discount"                 : 0,
+                     "loyalty_value"            : 0,
+                     "tax"                      : 0,
+                     "tax_id"                   : "329bcb37-08f5-11e4-a0f5-b8ca3a64f8f4",
+                     "tax_name"                 : "No Tax",
+                     "tax_rate"                 : 0,
+                     "tax_total"                 : 0,
+                     "price_total"               : 200,
+                     "display_retail_price_tax_inclusive"               : "0",
+                     "status"                   : "CONFIRMED"
+
+                                  ,
+                     "attributes" : [
+                        {
+                            "name" : "line_note",
+                            "value" : "Spree T-Shirt"                }
+                    ]
+                            }             ],
+                "totals":           { "total_tax"        : 10,
+                                      "total_price"      : 200,
+                                      "total_payment"        : 220,
+                                      "total_to_pay"          : -10                            },
+                "register_sale_payments" :        [      {
+                    "id"                       : "e08ea9ad-0d4b-11e4-a0f5-b8ca3a64f8f4",
+                    "payment_type_id"          : "3",
+                    "register_id"              : "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4",
+                    "retailer_payment_type_id" : "6530dbf7-0b73-11e4-a0f5-b8ca3a64f8f4",
+                    "name"                     : "Credit Card",
+                                "label"                    : "Credit Card",
+                    "payment_date"             : "2014-02-03 17:29:15",
+                    "amount"                   : 220                }    ]
+                                ,"taxes": [
+                                                    {
+                            "id": "329ca989-08f5-11e4-a0f5-b8ca3a64f8f4",
+                            "tax": 0,
+                            "name": "No Tax",
+                            "rate": 0                }
+                                            ]
+                     }        ]
+        }
+    http_version: 
+  recorded_at: Thu, 17 Jul 2014 18:47:59 GMT
+recorded_with: VCR 2.6.0
