@@ -98,8 +98,6 @@ module Vend
         end
       end
 
-      private
-
       def customer(client, payload)
         customer = client.retrieve_customers(nil, payload['email'])
 
@@ -120,6 +118,7 @@ module Vend
           'billing_address'  => payload['billing_address']
         }
       end
+
     end
   end
 end
