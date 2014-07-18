@@ -82,17 +82,24 @@ describe VendEndpoint do
   end
 
   describe '/add_order' do
+    let(:register_id) { "32aed862-08f5-11e4-a0f5-b8ca3a64f8f4" }
+    let(:payment_type_id) {  "b8ca3a64-f8a8-11e4-e0f5-0e6e5ecb3073" }
+    let(:order_response) { double("response", :[] => nil, :code => 200) }
+
     context 'success' do
-      xit 'imports new orders' do
+      it 'imports new orders' do
         message = {
           request_id: '123456',
           order: order,
           parameters: params
         }.to_json
 
+        Vend::Client.any_instance.stub(:register_id => register_id )
+        Vend::Client.any_instance.stub(:payment_type_id => register_id )
+        Vend::Client.any_instance.stub(:send_order => order_response )
+
         VCR.use_cassette('send_order') do
           post '/add_order', message, auth
-          last_response.should == ""
           last_response.status.should == 200
           last_response.body.should match /was sent to Vend/
         end

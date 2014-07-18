@@ -4,6 +4,9 @@ require 'sinatra'
 
 Bundler.require(:default, :test)
 
+require 'simplecov'
+SimpleCov.start
+
 require File.join(File.dirname(__FILE__), '..', 'vend_endpoint.rb')
 
 Dir['./spec/support/**/*.rb'].each &method(:require)

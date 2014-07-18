@@ -18,6 +18,7 @@ group :development, :test do
   gem 'shotgun'
   gem 'pry'
   gem 'pry-byebug'
+  gem 'simplecov', require: false
 end
 
 group :test do
