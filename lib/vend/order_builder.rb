@@ -40,6 +40,8 @@ module Vend
         end
       end
 
+      #Yeah, weird, but it's how Vend treat discount
+      #https://developers.vendhq.com/documentation/api/0.x/register-sales.html#discounts
       def add_discount_product(payload, register_id)
         {
           'product_id'=> 'e8ed7f09-0d4b-11e4-a0f5-b8ca3a64f8f4',
