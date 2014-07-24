@@ -44,8 +44,8 @@ module Vend
       (response['products'] || []).each_with_index.map do |product, i|
         products << {
             :id                 => product['id'],
-            'name'              => product['name'],
-            'source_id'         =>  product['source_id'],
+            'name'              => product['name'].split("/")[0],
+            'source_id'         => product['source_id'],
             'sku'               => product['sku'],
             'description'       => product['description'],
             'price'             => product['price'],
@@ -87,34 +87,11 @@ module Vend
     end
 
     def get_customers(poll_customer_timestamp)
-      response  = retrieve_customers(poll_customer_timestamp, nil)
+      response  = retrieve_customers(poll_customer_timestamp, nil, nil)
 
       customers = []
       (response['customers'] || []).each_with_index.map do |customer, i|
-        customers << {
-          :id         => customer['id'],
-          'firstname' => first_name(customer['name']),
-          'lastname'  => last_name(customer['name']),
-          'email'     => customer['email'],
-          'shipping_address'=> {
-            'address1' => customer['physical_address1'],
-            'address2' => customer['physical_address2'],
-            'zipcode'  => customer['physical_postcode'],
-            'city'     => customer['physical_city'],
-            'state'    => customer['physical_state'],
-            'country'  => customer['physical_country_id'],
-            'phone'    =>  customer['phone']
-          },
-          'billing_address'=> {
-            'address1' => customer['postal_address1'],
-            'address2' => customer['postal_address2'],
-            'zipcode'  => customer['postal_postcode'],
-            'city'     => customer['postal_city'],
-            'state'    => customer['postal_state'],
-            'country'  => customer['postal_country_id'],
-            'phone'    =>  customer['phone']
-          }
-        }
+        customers << Vend::CustomerBuilder.parse_customer(customer)
       end
       customers
     end
@@ -131,7 +108,7 @@ module Vend
 
       orders = []
       (response['register_sales'] || []).each_with_index.map do |order, i|
-        orders << Vend::OrderBuilder.parse_order(order)
+        orders << Vend::OrderBuilder.parse_order(order, self)
       end
       orders
     end
@@ -181,14 +158,15 @@ module Vend
       @registers[register_name]
     end
 
-    def retrieve_customers(poll_customer_timestamp, email)
+    def retrieve_customers(poll_customer_timestamp, email, id)
       options = {
         headers: headers,
         basic_auth: auth,
       }
-      options[:query] = {} if poll_customer_timestamp || email
+      options[:query] = {} if poll_customer_timestamp || email || id
       options[:query][:since] = poll_customer_timestamp if poll_customer_timestamp
       options[:query][:email] = email if email
+      options[:query][:id] = id if id
 
       response = self.class.get('/customers', options)
       validate_response(response)
@@ -213,12 +191,5 @@ module Vend
       response
     end
 
-    def first_name(name)
-      name.split(' ')[0]
-    end
-
-    def last_name(name)
-      name.split(' ').drop(1).join(' ')
-    end
   end
 end

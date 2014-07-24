@@ -3,7 +3,7 @@ module Vend
     class << self
       def build_customer(client, payload)
         hash = {
-
+          'customer_code'       => payload['customer_code'],
           'first_name'          => payload['firstname'],
           'last_name'           => payload['lastname'],
           'email'               => payload['email'],
@@ -24,6 +24,67 @@ module Vend
 
         hash[:id] = payload['id'] if payload.has_key?('id')
         hash
+      end
+
+      def parse_customer(vend_customer)
+        {
+          :id                => vend_customer['id'],
+          'customer_code'    => vend_customer['customer_code'],
+          'firstname'        => first_name(vend_customer['name']),
+          'lastname'         => last_name(vend_customer['name']),
+          'email'            => vend_customer['email'],
+          'shipping_address' => parse_shipping_address(vend_customer),
+          'billing_address'  => parse_billing_address(vend_customer)
+        }
+      end
+
+      def parse_shipping_address(vend_customer)
+        {
+          'address1' => vend_customer['physical_address1'],
+          'address2' => vend_customer['physical_address2'],
+          'zipcode'  => vend_customer['physical_postcode'],
+          'city'     => vend_customer['physical_city'],
+          'state'    => vend_customer['physical_state'],
+          'country'  => vend_customer['physical_country_id'],
+          'phone'    => vend_customer['phone']
+        }
+      end
+
+      def parse_billing_address(vend_customer)
+        {
+          'address1' => vend_customer['postal_address1'],
+          'address2' => vend_customer['postal_address2'],
+          'zipcode'  => vend_customer['postal_postcode'],
+          'city'     => vend_customer['postal_city'],
+          'state'    => vend_customer['postal_state'],
+          'country'  => vend_customer['postal_country_id'],
+          'phone'    => vend_customer['phone']
+        }
+      end
+
+      def parse_customer_for_order(vend_customer)
+        hash = {
+          'email'            => vend_customer['email'],
+          'shipping_address' => parse_shipping_address(vend_customer),
+          'billing_address'  => parse_billing_address(vend_customer)
+        }
+
+        hash['shipping_address']['firstname'] = first_name(vend_customer['name'])
+        hash['shipping_address']['lastname']  = last_name(vend_customer['name'])
+        hash['billing_address']['firstname']  = first_name(vend_customer['name'])
+        hash['billing_address']['lastname']   = last_name(vend_customer['name'])
+
+        hash
+      end
+
+      def first_name(name)
+        return '' if name.nil?
+        name.split(' ')[0]
+      end
+
+      def last_name(name)
+        return '' if name.nil?
+        name.split(' ').drop(1).join(' ')
       end
     end
   end

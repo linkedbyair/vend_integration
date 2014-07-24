@@ -148,7 +148,7 @@ describe Vend::OrderBuilder do
 
   describe '.parse_order' do
     it 'complete order' do
-      order_hash = Vend::OrderBuilder.parse_order(vend_order)
+      order_hash = Vend::OrderBuilder.parse_order(vend_order, client)
       expect(order_hash.has_key?('line_items')).to be
     end
   end

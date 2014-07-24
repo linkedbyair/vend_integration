@@ -12,9 +12,14 @@ module Vend
             'status'                 => payload['status'],
             'invoice_number'         => payload['line_items'][0]['product_id'],
             'note'                   => nil,
-            'register_sale_products' => products_of_order(client, payload),
             'register_sale_payments' =>  payments(client, payload)
         }
+
+        products = products_of_order(client, payload)
+        products << add_discount_product(payload, hash['register_id']) if payload['totals']['discount']
+
+        hash['register_sale_products']= products
+
         hash[:id] = payload['id'] if payload.has_key?('id')
         hash
       end
@@ -35,6 +40,25 @@ module Vend
         end
       end
 
+      def add_discount_product(payload, register_id)
+        {
+          'product_id'=> 'e8ed7f09-0d4b-11e4-a0f5-b8ca3a64f8f4',
+          'register_id'=> register_id,
+          'sequence'=> '0',
+          'handle'=> 'vend-discount',
+          'sku'=> 'vend-discount',
+          'name'=> 'Discount',
+          'quantity'=> -1,
+          'price'=> payload['totals']['discount'],
+          'price_set'=> 1,
+          'discount'=> 0,
+          'loyalty_value'=> 0,
+          'price_total'=> payload['totals']['discount']*-1,
+          'display_retail_price_tax_inclusive'=> '1',
+          'status'=> 'CONFIRMED'
+        }
+      end
+
       def payments(client, payload)
         (payload['payments'] || []).each_with_index.map do |payment, i|
           {
@@ -45,8 +69,8 @@ module Vend
         end
       end
 
-      def parse_order(vend_order)
-        {
+      def parse_order(vend_order, client)
+        hash = {
             :id              => vend_order['id'],
             'customer_id'    => vend_order['customer_id'],
             'register_id'    => vend_order['register_id'],
@@ -57,12 +81,19 @@ module Vend
             'totals'=> {
               'item'    => vend_order['totals']['total_price'],
               'tax'     => vend_order['total_tax'],
-              'payment' => vend_order['totals']['total_payment'],
+              'payment' => vend_order['totals']['total_payment']
             },
             'line_items'  => parse_items(vend_order),
-            'adjustments' => parse_adjustments(vend_order),
+            'adjustments' => [{
+                'name'  => 'tax',
+                'value' => vend_order['total_tax']
+              }],
             'payments'    => parse_payments(vend_order)
         }
+
+        customer = client.retrieve_customers(nil, nil, vend_order['customer_id'])['customers'][0]
+        hash.merge!(Vend::CustomerBuilder.parse_customer_for_order(customer)) if customer
+        hash
       end
 
       def parse_items(vend_order)
@@ -77,21 +108,12 @@ module Vend
         end
       end
 
-      def parse_adjustments(vend_order)
-        (vend_order['taxes'] || []).each_with_index.map do |tax, i|
-            {
-              'id'    => tax['id'],
-              'name'  => tax['name'],
-              'value' => tax['rate']
-            }
-        end
-      end
-
       def parse_payments(vend_order)
         (vend_order['register_sale_payments'] || []).each_with_index.map do |payment, i|
           {
             'id'             => payment['id'],
             'number'         => payment['payment_type_id'],
+            'status'         => vend_order['status'],
             'amount'         => payment['amount'].to_f,
             'payment_method' => payment['name']
           }
@@ -99,7 +121,7 @@ module Vend
       end
 
       def customer(client, payload)
-        customer = client.retrieve_customers(nil, payload['email'])
+        customer = client.retrieve_customers(nil, payload['email'], nil)
 
         if customer['customers'][0].nil?
           customer = client.send_customer(build_customer_based_on_order(payload))
