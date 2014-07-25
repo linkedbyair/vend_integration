@@ -198,15 +198,18 @@ module Vend
     end
 
     def get_discount_product
-      options = {
-        headers: headers,
-        basic_auth: auth,
-        query: {handle: 'vend-discount', sky: 'vend-discount'}
-      }
-      response = self.class.get('/products', options)
+      unless @discount_product
+        options = {
+          headers: headers,
+          basic_auth: auth,
+          query: {handle: 'vend-discount', sky: 'vend-discount'}
+        }
+        response = self.class.get('/products', options)
 
-      validate_response(response)
-
+        validate_response(response)
+        @discount_product =  response['products'][0]['id']
+      end
+      @discount_product
     end
 
     private

@@ -9,7 +9,7 @@ module Vend
             'sale_date'              => payload['placed_on'],
             'total_price'            => payload['totals']['item'].to_f,
             'total_tax'              => payload['totals']['tax'].to_f,
-            'tax_name'               => nil,
+            'tax_name'               => 'TAX',
             'status'                 => payload['status'],
             'invoice_number'         => payload['invoice_number'] || payload['id'],
             'note'                   => nil,
@@ -17,7 +17,7 @@ module Vend
         }
 
         products = products_of_order(client, payload)
-        products << add_discount_product(payload, hash['register_id']) if payload['totals']['discount']
+        products << add_discount_product(payload, hash['register_id'], client) if payload['totals']['discount']
 
         hash['register_sale_products']= products
 
@@ -43,9 +43,9 @@ module Vend
 
       #Yeah, weird, but it's how Vend treat discount
       #https://developers.vendhq.com/documentation/api/0.x/register-sales.html#discounts
-      def add_discount_product(payload, register_id)
+      def add_discount_product(payload, register_id, client)
         {
-          'product_id'=> 'b8ca3a64-f879-11e4-e0f5-14090547c535',
+          'product_id'=> client.get_discount_product,
           'register_id'=> register_id,
           'sequence'=> '0',
           'handle'=> 'vend-discount',
