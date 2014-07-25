@@ -119,10 +119,12 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post %r{(add_customer|update_customer)$} do
     begin
-      @payload[:customer].delete(:id) if request.fullpath.match /add_customer/
-
       client   = Vend::Client.new(@config['vend_site_id'], @config['vend_user'], @config['vend_password'])
-      response = client.send_customer(@payload[:customer])
+      if request.fullpath.match /add_customer/
+        response = client.send_new_customer(@payload[:customer])
+      else
+        response = client.send_update_customer(@payload[:customer])
+      end
       code     = 200
       set_summary "The customer #{@payload[:customer][:firstname]} #{@payload[:customer][:lastname]} was sent to Vend POS."
     rescue VendEndpointError => e

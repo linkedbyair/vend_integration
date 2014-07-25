@@ -1,9 +1,16 @@
 module Vend
   class CustomerBuilder
     class << self
-      def build_customer(client, payload)
+
+      def build_update_customer(client, payload)
+        hash = build_new_customer(client, payload)
+        customer = client.retrieve_customers(nil, payload['email'], nil)
+
+        hash[:id] = customer['customers'][0]['id'] if !customer['customers'][0].nil?
+      end
+
+      def build_new_customer(client, payload)
         hash = {
-          'customer_code'       => payload['customer_code'],
           'first_name'          => payload['firstname'],
           'last_name'           => payload['lastname'],
           'email'               => payload['email'],
@@ -21,15 +28,13 @@ module Vend
           'postal_state'        => payload['billing_address']['state'],
           'postal_country_id'   => payload['billing_address']['country']
         }
-
-        hash[:id] = payload['id'] if payload.has_key?('id')
+        hash['customer_code'] = payload['id'] if payload['id']
         hash
       end
 
       def parse_customer(vend_customer)
         {
-          :id                => vend_customer['id'],
-          'customer_code'    => vend_customer['customer_code'],
+          :id                => vend_customer['customer_code'] || vend_customer['id'],
           'firstname'        => first_name(vend_customer['name']),
           'lastname'         => last_name(vend_customer['name']),
           'email'            => vend_customer['email'],

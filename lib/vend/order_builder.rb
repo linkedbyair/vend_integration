@@ -126,7 +126,7 @@ module Vend
         customer = client.retrieve_customers(nil, payload['email'], nil)
 
         if customer['customers'][0].nil?
-          customer = client.send_customer(build_customer_based_on_order(payload))
+          customer = client.send_new_customer(build_customer_based_on_order(payload))
           customer['customer']['id']
         else
           customer['customers'][0]['id']

@@ -25,9 +25,17 @@ module Vend
       validate_response(response)
     end
 
-    def send_customer(payload)
-      customer_hash   = Vend::CustomerBuilder.build_customer(self, payload)
+    def send_new_customer(payload)
+      customer_hash   = Vend::CustomerBuilder.build_new_customer(self, payload)
+      send_customer(customer_hash)
+    end
 
+    def send_update_customer(payload)
+      customer_hash   = Vend::CustomerBuilder.build_new_customer(self, payload)
+      send_customer(customer_hash)
+    end
+
+    def send_customer(customer_hash)
       options = {
         headers: headers,
         basic_auth: auth,
@@ -87,12 +95,22 @@ module Vend
     end
 
     def get_customers(poll_customer_timestamp)
-      response  = retrieve_customers(poll_customer_timestamp, nil, nil)
+      customers      = []
+      has_more_pages = false
+      page           = 1
 
-      customers = []
-      (response['customers'] || []).each_with_index.map do |customer, i|
-        customers << Vend::CustomerBuilder.parse_customer(customer)
-      end
+      begin
+        response  = retrieve_customers(poll_customer_timestamp, nil, nil, page)
+
+        (response['customers'] || []).each_with_index.map do |customer, i|
+          customers << Vend::CustomerBuilder.parse_customer(customer)
+        end
+
+        page           = page + 1 if response.has_key?('pagination')
+        has_more_pages = response.has_key?('pagination')
+        has_more_pages = page <= response['pagination']['pages'] if response.has_key?('pagination')
+      end while has_more_pages
+
       customers
     end
 
@@ -158,7 +176,7 @@ module Vend
       @registers[register_name]
     end
 
-    def retrieve_customers(poll_customer_timestamp, email, id)
+    def retrieve_customers(poll_customer_timestamp, email, id, page=1)
       options = {
         headers: headers,
         basic_auth: auth,
