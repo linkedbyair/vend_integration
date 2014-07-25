@@ -50,29 +50,24 @@ module Vend
       response  = retrieve_products(poll_product_timestamp)
       products = []
       (response['products'] || []).each_with_index.map do |product, i|
-        products << {
+        hash = {
             :id                 => product['id'],
             'name'              => product['name'].split("/")[0],
             'source_id'         => product['source_id'],
             'sku'               => product['sku'],
             'description'       => product['description'],
             'price'             => product['price'],
-            'permalink'         => product['handle'],
+            'permalink'         => product['sku'],
             'meta_keywords'     => product['tags'],
             'updated_at'        => product['updated_at'],
-            'taxons'            => [
-              [
-                'Brands',
-                product['brand_name']
-              ]
-            ],
             'images'=> [
               {
                 'url'=> product['image']
               }
             ]
           }
-
+          hash['taxons'] = [['Brands', product['brand_name']]] if product['brand_name'] && ! product['brand_name'].empty?
+          products << hash
       end
       products
     end
@@ -181,10 +176,10 @@ module Vend
         headers: headers,
         basic_auth: auth,
       }
-      options[:query] = {} if poll_customer_timestamp || email || id
+      options[:query]         = {} if poll_customer_timestamp || email || id
       options[:query][:since] = poll_customer_timestamp if poll_customer_timestamp
       options[:query][:email] = email if email
-      options[:query][:id] = id if id
+      options[:query][:id]    = id if id
 
       response = self.class.get('/customers', options)
       validate_response(response)
@@ -200,6 +195,18 @@ module Vend
       response = self.class.get('/products', options)
 
       validate_response(response)
+    end
+
+    def get_discount_product
+      options = {
+        headers: headers,
+        basic_auth: auth,
+        query: {handle: 'vend-discount', sky: 'vend-discount'}
+      }
+      response = self.class.get('/products', options)
+
+      validate_response(response)
+
     end
 
     private

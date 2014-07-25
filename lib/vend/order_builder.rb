@@ -3,16 +3,17 @@ module Vend
     class << self
       def order_placed(client, payload)
         hash = {
+            'id'                     => payload['id'],
             'register_id'            => client.register_id(payload['register']),
-            'customer_id'            => customer(client, payload),
+            'customer_id'            => customer_id(client, payload),
             'sale_date'              => payload['placed_on'],
             'total_price'            => payload['totals']['item'].to_f,
             'total_tax'              => payload['totals']['tax'].to_f,
             'tax_name'               => nil,
             'status'                 => payload['status'],
-            'invoice_number'         => payload['line_items'][0]['product_id'],
+            'invoice_number'         => payload['invoice_number'] || payload['id'],
             'note'                   => nil,
-            'register_sale_payments' =>  payments(client, payload)
+            'register_sale_payments' => payments(client, payload)
         }
 
         products = products_of_order(client, payload)
@@ -44,7 +45,7 @@ module Vend
       #https://developers.vendhq.com/documentation/api/0.x/register-sales.html#discounts
       def add_discount_product(payload, register_id)
         {
-          'product_id'=> 'e8ed7f09-0d4b-11e4-a0f5-b8ca3a64f8f4',
+          'product_id'=> 'b8ca3a64-f879-11e4-e0f5-14090547c535',
           'register_id'=> register_id,
           'sequence'=> '0',
           'handle'=> 'vend-discount',
@@ -64,9 +65,10 @@ module Vend
       def payments(client, payload)
         (payload['payments'] || []).each_with_index.map do |payment, i|
           {
-            'retailer_payment_type_id'=> client.payment_type_id(payment['payment_method']),
-            'payment_date'=> payload['placed_on'],
-            'amount'=> payment['amount'].to_f
+            'id'                       => payment['id'] || payment['number'],
+            'retailer_payment_type_id' => client.payment_type_id(payment['payment_method']),
+            'payment_date'             => payload['placed_on'],
+            'amount'                   => payment['amount'].to_f
           }
         end
       end
@@ -122,7 +124,7 @@ module Vend
         end
       end
 
-      def customer(client, payload)
+      def customer_id(client, payload)
         customer = client.retrieve_customers(nil, payload['email'], nil)
 
         if customer['customers'][0].nil?
