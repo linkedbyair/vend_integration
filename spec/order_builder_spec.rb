@@ -144,7 +144,9 @@ describe Vend::OrderBuilder do
 
     let(:client) { double('client', :register_id => '53b3501c-887c-102d-8a4b-a9cf13f17faa',
                                     :retrieve_customers => {'customers' => [ { 'id' => '53b3501c-887c-102d-8a4b-a9cf13f17faa' } ] },
-                                    :payment_type_id => '64579cea-3494-2938-85a1-7649df52fb5b') }
+                                    :payment_type_id => '64579cea-3494-2938-85a1-7649df52fb5b',
+                                    :get_shipping_product => '64579cea-3494-2938-85a1-7649df52fb5b',
+                                    :get_discount_product => '64579cea-3494-2938-85a1-7649df52fb5b') }
 
   describe '.parse_order' do
     it 'complete order' do

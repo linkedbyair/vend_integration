@@ -202,7 +202,7 @@ module Vend
         options = {
           headers: headers,
           basic_auth: auth,
-          query: {handle: 'vend-discount', sky: 'vend-discount'}
+          query: {handle: 'vend-discount', sku: 'vend-discount'}
         }
         response = self.class.get('/products', options)
 
@@ -210,6 +210,21 @@ module Vend
         @discount_product =  response['products'][0]['id']
       end
       @discount_product
+    end
+
+    def get_shipping_product
+      unless @shipping_product
+        options = {
+          headers: headers,
+          basic_auth: auth,
+          query: {handle: 'shipping', sku: 'shipping'}
+        }
+        response = self.class.get('/products', options)
+
+        validate_response(response)
+        @shipping_product =  response['products'][0]['id'] if ! response['products'][0].nil?
+      end
+      @shipping_product
     end
 
     private

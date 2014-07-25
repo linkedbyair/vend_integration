@@ -19,6 +19,9 @@ module Vend
         products = products_of_order(client, payload)
         products << add_discount_product(payload, hash['register_id'], client) if payload['totals']['discount']
 
+        shipping = add_shipping_product(payload, hash['register_id'], client) if payload['totals']['shipping']
+        products << shipping if shipping
+
         hash['register_sale_products']= products
 
         hash[:id] = payload['id'] if payload.has_key?('id')
@@ -62,6 +65,26 @@ module Vend
         }
       end
 
+      def add_shipping_product(payload, register_id, client)
+        return nil if client.get_shipping_product.nil?
+
+        {
+          'product_id'=> client.get_shipping_product,
+          'register_id'=> register_id,
+          'sequence'=> '0',
+          'handle'=> 'shipping',
+          'sku'=> 'shipping',
+          'name'=> 'Shipping',
+          'quantity'=> 1,
+          'price'=> payload['totals']['shipping'],
+          'price_set'=> 1,
+          'discount'=> 0,
+          'loyalty_value'=> 0,
+          'price_total'=> payload['totals']['shipping'],
+          'status'=> 'CONFIRMED'
+        }
+      end
+
       def payments(client, payload)
         (payload['payments'] || []).each_with_index.map do |payment, i|
           {
@@ -74,6 +97,13 @@ module Vend
       end
 
       def parse_order(vend_order, client)
+        adjustments = [{
+                'name'  => 'tax',
+                'value' => vend_order['total_tax']
+              }]
+        shipment_adjust = build_shipping_from_items(vend_order)
+        adjustments << shipment_adjust if shipment_adjust
+
         hash = {
             :id              => vend_order['id'],
             'customer_id'    => vend_order['customer_id'],
@@ -87,11 +117,8 @@ module Vend
               'tax'     => vend_order['total_tax'],
               'payment' => vend_order['totals']['total_payment']
             },
-            'line_items'  => parse_items(vend_order),
-            'adjustments' => [{
-                'name'  => 'tax',
-                'value' => vend_order['total_tax']
-              }],
+            'line_items'  => parse_items(vend_order, client),
+            'adjustments' => adjustments,
             'payments'    => parse_payments(vend_order)
         }
 
@@ -100,12 +127,15 @@ module Vend
         hash
       end
 
-      def parse_items(vend_order)
-        (vend_order['register_sale_products'] || []).each_with_index.map do |line_item, i|
+      def parse_items(vend_order, client)
+        itens = (vend_order['register_sale_products'] || []).
+            reject{|item| item['product_id'] == client.get_shipping_product || item['product_id'] == client.get_discount_product}
+
+        itens.each_with_index.map do |line_item, i|
           {
             'id'         => line_item['id'],
             'product_id' => line_item['product_id'],
-            'name'       => line_item['name'],
+            'name'       => line_item['name'].split("/")[0],
             'quantity'   => line_item['quantity'].to_f,
             'price'      => line_item['price'].to_f
           }
@@ -143,6 +173,19 @@ module Vend
           'shipping_address' => payload['shipping_address'],
           'billing_address'  => payload['billing_address']
         }
+      end
+
+      def build_shipping_from_items(vend_order)
+        shipping_adjstment = nil
+        (vend_order['register_sale_products'] || []).each_with_index.map do |line_item, i|
+          if line_item['name'] == 'shipping'
+            shipping_adjstment = {
+                                  'name'  => 'Shipping',
+                                  'value' => line_item['price'].to_f
+                                 }
+          end
+        end
+        shipping_adjstment
       end
 
     end

@@ -7,6 +7,7 @@ module Vend
         customer = client.retrieve_customers(nil, payload['email'], nil)
 
         hash[:id] = customer['customers'][0]['id'] if !customer['customers'][0].nil?
+        hash
       end
 
       def build_new_customer(client, payload)
