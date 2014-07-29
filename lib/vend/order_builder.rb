@@ -1,3 +1,5 @@
+require 'digest'
+
 module Vend
   class OrderBuilder
     class << self
@@ -88,7 +90,7 @@ module Vend
       def payments(client, payload)
         (payload['payments'] || []).each_with_index.map do |payment, i|
           {
-            'id'                       => payment['id'] || payment['number'],
+            'id'                       => payment['id'] || Digest::MD5.hexdigest(payload['id'].to_s).to_s,
             'retailer_payment_type_id' => client.payment_type_id(payment['payment_method']),
             'payment_date'             => payload['placed_on'],
             'amount'                   => payment['amount'].to_f
