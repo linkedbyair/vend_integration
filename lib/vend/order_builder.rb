@@ -9,7 +9,7 @@ module Vend
             'register_id'            => client.register_id(payload['register']),
             'customer_id'            => customer_id(client, payload),
             'sale_date'              => payload['placed_on'],
-            'total_price'            => payload['totals']['item'].to_f,
+            'total_price'            => (payload['totals']['item'].to_f + (payload['totals']['discount'].to_f*-1) + payload['totals']['shipping'].to_f),
             'total_tax'              => payload['totals']['tax'].to_f,
             'tax_name'               => 'TAX',
             'status'                 => payload['status'],
@@ -100,11 +100,16 @@ module Vend
 
       def parse_order(vend_order, client)
         adjustments = [{
-                'name'  => 'tax',
+                'name'  => 'Tax',
                 'value' => vend_order['total_tax']
               }]
         shipment_adjust = build_shipping_from_items(vend_order)
         adjustments << shipment_adjust if shipment_adjust
+        shipment_amount = shipment_adjust['value'] if shipment_adjust
+
+        discount_adjust = build_discount_from_items(vend_order)
+        adjustments << discount_adjust if discount_adjust
+        discount_amount = discount_adjust['value'] if discount_adjust
 
         hash = {
             :id              => vend_order['id'],
@@ -115,7 +120,8 @@ module Vend
             'placed_on'      => vend_order['sale_date'],
             'updated_at'     => vend_order['updated_at'],
             'totals'=> {
-              'item'    => vend_order['totals']['total_price'],
+              'item'    => vend_order['totals']['total_price'].to_f - shipment_amount.to_f - (discount_amount.to_f*-1),
+              'order'   => vend_order['totals']['total_payment'],
               'tax'     => vend_order['total_tax'],
               'payment' => vend_order['totals']['total_payment']
             },
@@ -123,6 +129,8 @@ module Vend
             'adjustments' => adjustments,
             'payments'    => parse_payments(vend_order)
         }
+        hash['totals']['shipping'] = shipment_amount.to_f if shipment_amount
+        hash['totals']['discount'] = discount_amount.to_f if discount_amount
 
         customer = client.retrieve_customers(nil, nil, vend_order['customer_id'])['customers'][0]
         hash.merge!(Vend::CustomerBuilder.parse_customer_for_order(customer)) if customer
@@ -188,6 +196,19 @@ module Vend
           end
         end
         shipping_adjstment
+      end
+
+      def build_discount_from_items(vend_order)
+        discount_adjstment = nil
+        (vend_order['register_sale_products'] || []).each_with_index.map do |line_item, i|
+          if line_item['name'] == 'Discount'
+            discount_adjstment = {
+                                  'name'  => 'Discount',
+                                  'value' => line_item['price'].to_f
+                                 }
+          end
+        end
+        discount_adjstment
       end
 
     end
