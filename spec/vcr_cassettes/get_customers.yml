@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?page_size=100
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 27 Nov 2014 11:58:59 GMT
+      - Thu, 27 Nov 2014 13:52:10 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -37,10 +37,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=15638400; includeSubDomains
       Set-Cookie:
-      - vend=WqYlUHxCjV3T9lnEUbgiU18Xz8B:CkmQcvdnE3GEDX28RSksUc1olTx; expires=Thu,
-        04-Dec-2014 11:58:59 GMT; path=/; domain=vendhq.com; secure; httponly
+      - vend=ZBEgjoY6DzOcuw6HglURAlfMxnT:RbXvy2CaVewVsLOIWSfNepN0NJg; expires=Thu,
+        04-Dec-2014 13:52:10 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
       X-Hue:
-      - rose
+      - chestnut
     body:
       encoding: UTF-8
       string: |-
@@ -2163,5 +2164,5 @@ http_interactions:
                 ]
         }
     http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:00 GMT
+  recorded_at: Thu, 27 Nov 2014 13:52:11 GMT
 recorded_with: VCR 2.6.0

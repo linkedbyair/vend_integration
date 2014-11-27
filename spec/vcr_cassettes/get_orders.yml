@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/register_sales
+    uri: https://user@example.com:123@spree.vendhq.com/api/register_sales?page_size=10
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 27 Nov 2014 11:59:03 GMT
+      - Thu, 27 Nov 2014 13:52:14 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -37,14 +37,20 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=15638400; includeSubDomains
       Set-Cookie:
-      - vend=EKiasosoVImbuSBEBU13IXv3O6T:FtbtzPRW8H4QgLoZnKg5NUTruB8; expires=Thu,
-        04-Dec-2014 11:59:03 GMT; path=/; domain=vendhq.com; secure; httponly
+      - vend=1062BnM3vu4AcKxDGIUlobjVzKa:N56VRfn9mBz9z8du0JxihmY7iTj; expires=Thu,
+        04-Dec-2014 13:52:14 GMT; path=/; domain=vendhq.com; secure; httponly
       X-Hue:
-      - maroon
+      - claret
     body:
       encoding: UTF-8
       string: |-
         {
+          "pagination":
+                {
+                "results" : 26,
+                "page" :    1,
+                "page_size" : 10,
+                "pages" :   3        },
             "register_sales"    :   [    {   "id":  "R5500000000001",
                 "register_id":          "b8ca3a64-f8f4-11e4-e0f5-13fc9950aba0",
                 "market_id":            "3",
@@ -1513,7 +1519,1227 @@ http_interactions:
                     "payment_date"             : "2014-08-03 17:29:15",
                     "amount"                   : 220                }    ]
                              }
-        ,            {   "id":  "R154085346696108",
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:15 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/products?handle=shipping&sku=shipping
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:15 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=QgP8Ys6sWNRCqd1Gn8DZ3HiRNpj:Rz127avfeSKY2QHbn75LIAoQtXh; expires=Thu,
+        04-Dec-2014 13:52:15 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
+      X-Hue:
+      - web-m3c8
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "products"    :   [        {
+        "id":               "b8ca3a64-f879-11e4-e0f5-143ac22325a9",
+        "source_id":        "",
+        "variant_source_id": "",
+        "handle":           "shipping",
+        "type":           "",
+        "variant_parent_id":  "",
+        "variant_option_one_name": "",
+        "variant_option_one_value": "",
+        "variant_option_two_name": "",
+        "variant_option_two_value": "",
+        "variant_option_three_name": "",
+        "variant_option_three_value": "",
+        "active":           true,
+        "name":             "shipping",
+        "base_name":        "shipping",
+        "description":      "",
+        "image":            "https:\/\/spree.vendhq.com\/images\/placeholder\/product\/no-image-white-thumb.png",
+        "image_large":      "https:\/\/spree.vendhq.com\/images\/placeholder\/product\/no-image-white-original.png",
+        "images":           [],
+        "sku":              "shipping",
+        "tags":             "",
+        "brand_id":         "",
+        "brand_name":       "",
+        "supplier_name":    "",
+        "supplier_code":    "",
+        "supply_price":     "0.00",
+        "account_code_purchase":     "",
+        "account_code_sales":        "",
+        "track_inventory":           false,
+            "price_book_entries":    [    {
+                "id"                :       "eb24f828-7c36-0fa6-2ac9-9122def330ef",
+                "product_id"        :       "b8ca3a64-f879-11e4-e0f5-143ac22325a9",
+                "price_book_id"     :       "b8ca3a64-f8f4-11e4-e0f5-13fc99403fa9",
+                "price_book_name"   :       "General Price Book (All Products)",
+                "type"              :       "BASE",
+                "outlet_name"       :       "",
+                "outlet_id"         :       "",
+                "customer_group_name" :       "All Customers",
+                "customer_group_id" :       "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "price"             :       0,
+                "loyalty_value"     :       null,
+                "tax"               :       0,
+                "tax_id"            :       "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
+                "tax_rate"          :       0,
+                "tax_name"          :       "TAX",
+                "display_retail_price_tax_inclusive"          :       0,
+                "min_units"         :       "",
+                "max_units"         :       "",
+                "valid_from"        :       "",
+                "valid_to"          :       ""
+            }],
+        "price":            0,
+        "tax":              0,
+        "tax_id":           "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
+        "tax_rate" :        0,
+        "tax_name" :        "TAX",
+        "taxes" : [{"outlet_id":"b8ca3a64-f8f4-11e4-e0f5-13fc994fce37","tax_id":"b8ca3a64-f879-11e4-e0f5-14304f5c6b69"}],
+        "display_retail_price_tax_inclusive"          :       0,
+        "updated_at":       "2014-07-25 20:32:12",
+        "deleted_at":       ""
+        }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:16 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/products?handle=vend-discount&sku=vend-discount
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:17 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=14LI1isfT6Bio4OMVwZ6bs5X40W:QaXMAk21IdpUh7XJDKJmFTrz4iK; expires=Thu,
+        04-Dec-2014 13:52:17 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - rose
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "products"    :   [        {
+        "id":               "b8ca3a64-f879-11e4-e0f5-14090547c535",
+        "source_id":        "",
+        "variant_source_id": "",
+        "handle":           "vend-discount",
+        "type":           "",
+        "variant_parent_id":  "",
+        "variant_option_one_name": "",
+        "variant_option_one_value": "",
+        "variant_option_two_name": "",
+        "variant_option_two_value": "",
+        "variant_option_three_name": "",
+        "variant_option_three_value": "",
+        "active":           true,
+        "name":             "Discount",
+        "base_name":        "Discount",
+        "description":      "Discount product",
+        "image":            "https:\/\/spree.vendhq.com\/images\/placeholder\/product\/no-image-white-thumb.png",
+        "image_large":      "https:\/\/spree.vendhq.com\/images\/placeholder\/product\/no-image-white-original.png",
+        "images":           [],
+        "sku":              "vend-discount",
+        "tags":             "",
+        "brand_id":         "",
+        "brand_name":       "",
+        "supplier_name":    "",
+        "supplier_code":    "",
+        "supply_price":     "0.00",
+        "account_code_purchase":     "",
+        "account_code_sales":        "",
+        "track_inventory":           false,
+            "price_book_entries":    [    {
+                "id"                :       "848c76a7-89ee-bd54-e359-a53bc50339e7",
+                "product_id"        :       "b8ca3a64-f879-11e4-e0f5-14090547c535",
+                "price_book_id"     :       "b8ca3a64-f8f4-11e4-e0f5-13fc99403fa9",
+                "price_book_name"   :       "General Price Book (All Products)",
+                "type"              :       "BASE",
+                "outlet_name"       :       "",
+                "outlet_id"         :       "",
+                "customer_group_name" :       "All Customers",
+                "customer_group_id" :       "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "price"             :       0,
+                "loyalty_value"     :       null,
+                "tax"               :       0,
+                "tax_id"            :       "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
+                "tax_rate"          :       0,
+                "tax_name"          :       "TAX",
+                "display_retail_price_tax_inclusive"          :       0,
+                "min_units"         :       "",
+                "max_units"         :       "",
+                "valid_from"        :       "",
+                "valid_to"          :       ""
+            }],
+        "price":            0,
+        "tax":              0,
+        "tax_id":           "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
+        "tax_rate" :        0,
+        "tax_name" :        "TAX",
+        "taxes" : [{"outlet_id":"b8ca3a64-f8f4-11e4-e0f5-13fc994fce37","tax_id":"b8ca3a64-f879-11e4-e0f5-14304f5c6b69"}],
+        "display_retail_price_tax_inclusive"          :       0,
+        "updated_at":       "2014-07-25 14:36:11",
+        "deleted_at":       ""
+        }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:17 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:18 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=N621RBLPrscWuQ8OKfPlLkYkNEe:EbKvvyCJnEzvicEFMcMJMbHmBXF; expires=Thu,
+        04-Dec-2014 13:52:18 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - claret
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:18 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:19 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=E8rRCOKrBQX5a8BWui2A1Ch8As:IJaMzAt6TJqRtFEu1IhLJFNTLiN; expires=Thu,
+        04-Dec-2014 13:52:19 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - maroon
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:20 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:20 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=10JH7i0sTeUOepziO0ZchdYjLYi:GE2OEu2usBEtDllqbQrl9pFlm0n; expires=Thu,
+        04-Dec-2014 13:52:20 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
+      X-Hue:
+      - web-m3c8
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:21 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:22 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=S20Y6lyiHr4S1e5kFknuf7mpsnM:CplHLk2mrujh1DYcXc8zmqO22jn; expires=Thu,
+        04-Dec-2014 13:52:22 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - red
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:22 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:23 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=Ao83rz3B0IVyvyoQvIa1eht0BkQ:TNp9FmpxqTlKE9KWMpHqu5YzYT3; expires=Thu,
+        04-Dec-2014 13:52:23 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - rose
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:23 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:24 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=Ese45Wnuwe7gwafIkWRGemAzqwZ:33BSoilAY3Pa5NG04Kw9zIBGuXR; expires=Thu,
+        04-Dec-2014 13:52:24 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - rose
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:24 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:25 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=967DbPja6QOowJ1Pcn0KMqxmIMy:8LxIZDgMgMVGUtNb0gviQxpQZih; expires=Thu,
+        04-Dec-2014 13:52:25 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - rose
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:25 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:26 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=IZsnH6lLLIL2WcJtE88qAccdDYU:2UmmMF9x0ILBkPsIWhW7WGpUVIX; expires=Thu,
+        04-Dec-2014 13:52:26 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
+      X-Hue:
+      - web-m3c8
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:27 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:28 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=1l5eM9hickkSJ0Pj3ntACxQbjZQ:BAldw54pficxnTFN43YeTPJaCbM; expires=Thu,
+        04-Dec-2014 13:52:28 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - red
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:28 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:29 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=PD0uaUx5iTYl8ctUN7ptlxscpT3:9gMcBYo4TjuYMoDHTk89Zezki5y; expires=Thu,
+        04-Dec-2014 13:52:29 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - red
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:29 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/register_sales?page=2&page_size=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:30 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=POQxlTEygnHznAHH9CpeFZgeJmi:5tKOZAqzaIXAToiqXlK6ig9bf1d; expires=Thu,
+        04-Dec-2014 13:52:30 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - claret
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "pagination":
+                {
+                "results" : 26,
+                "page" :    2,
+                "page_size" : 10,
+                "pages" :   3        },
+            "register_sales"    :   [    {   "id":  "R154085346696108",
                 "register_id":          "b8ca3a64-f8f4-11e4-e0f5-13fc9950aba0",
                 "market_id":            "3",
                 "customer_id":          "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
@@ -2661,7 +3887,1007 @@ http_interactions:
                             "rate": 0                }
                                             ]
                      }
-        ,            {   "id":  "R3322223463305228",
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:31 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:32 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=PVRYIySKlWXvPXj2lzISTi1iypR:TWXqEqRnv9xIxQqlD0wVrjELQzz; expires=Thu,
+        04-Dec-2014 13:52:32 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
+      X-Hue:
+      - chestnut
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:32 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:33 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=Cww6Syfw9b6yrr8z0njz4BHAHVU:7ibC3ElfWxbNFd5T08bXXVfOPaQ; expires=Thu,
+        04-Dec-2014 13:52:33 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
+      X-Hue:
+      - web-m3c8
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "name":             "Joe Smith",
+                "customer_code":    "Joe-8QN2",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joe",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@example.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "deleted_at":               "",
+                "balance":                  "0.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@example.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:33 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-13fcfede68e0&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:34 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=aBroIC0Hy1lOh4gkIz1uLteCSCy:CZRg8UpMZvJYRxdfT59srG83bcG; expires=Thu,
+        04-Dec-2014 13:52:34 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
+      X-Hue:
+      - chestnut
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "b8ca3a64-f879-11e4-e0f5-13fcfede68e0",
+                "name":             "Reinaldo Braga",
+                "customer_code":    "rei123",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Reinaldo",
+                "last_name":              "Braga",
+                "company_name":           "",
+                "phone":                  "5511984244281",
+                "mobile":                 "5511984244281",
+                "fax":                    "",
+                "email":                  "reinaldo@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "Rua dos Aquitib\u00e1s, 27 - Apto 204",
+                "physical_address2":      "Jd S\u00e3o Paulo",
+                "physical_suburb":        "Americana",
+                "physical_city":          "Americana",
+                "physical_postcode":      "13468-170",
+                "physical_state":         "S\u00e3o Paulo",
+                "physical_country_id":    "BR",
+                "postal_address1":        "Rua dos Jequitib\u00e1s, 27 - Apto 204",
+                "postal_address2":        "Jd S\u00e3o Paulo",
+                "postal_suburb":          "Americana",
+                "postal_city":            "Americana",
+                "postal_postcode":        "13468-170",
+                "postal_state":           "S\u00e3o Paulo",
+                "postal_country_id" :     "BR",        "updated_at":               "2014-08-14 12:41:44",
+                "deleted_at":               "",
+                "balance":                  "4.950",
+                "year_to_date":             "0.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "5511984244281",
+                    "email":            "reinaldo@spreecommerce.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:34 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:35 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=DcCYdrjXLbrlxC9OeA8gPieaTge:SMz665yJiHhGEvcbTuwUBDidaUm; expires=Thu,
+        04-Dec-2014 13:52:35 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - flame
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
+                "name":             "Joes Smith",
+                "customer_code":    "Joe-R47E",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joes",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
+                "deleted_at":               "",
+                "balance":                  "-210.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@spreecommerce.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:36 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:36 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=VX3asa4Dl5pi00dEHXuG5nicIL0:JxvO7U4wkuYbmDuEry9UuJ2VVGE; expires=Thu,
+        04-Dec-2014 13:52:36 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - rose
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
+                "name":             "Joes Smith",
+                "customer_code":    "Joe-R47E",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joes",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
+                "deleted_at":               "",
+                "balance":                  "-210.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@spreecommerce.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:37 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:38 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=99u4ZUCeqnFcX1vQUiCF6ewd6Jq:3uK6rJ1B9c4QdKkPKYzt2b0kLfv; expires=Thu,
+        04-Dec-2014 13:52:38 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - maroon
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
+                "name":             "Joes Smith",
+                "customer_code":    "Joe-R47E",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joes",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
+                "deleted_at":               "",
+                "balance":                  "-210.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@spreecommerce.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:38 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:39 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=VNdviyGnac2qx0DBIlImx2LWJ5W:KPmBuNSTPizKArjkapxAqc5ZxWE; expires=Thu,
+        04-Dec-2014 13:52:39 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - amaranth
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
+                "name":             "Joes Smith",
+                "customer_code":    "Joe-R47E",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joes",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
+                "deleted_at":               "",
+                "balance":                  "-210.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@spreecommerce.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:39 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:40 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=Ic96CXDNMfWlENNWWdTpMl6alMX:ZD78DeG9TqWy3UObIntOigS25WM; expires=Thu,
+        04-Dec-2014 13:52:40 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
+      X-Hue:
+      - web-m3c8
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
+                "name":             "Joes Smith",
+                "customer_code":    "Joe-R47E",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joes",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
+                "deleted_at":               "",
+                "balance":                  "-210.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@spreecommerce.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:41 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:42 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=NitoeFd5DU2wp7wmwZspFUnIJEM:SR3i5iyc8xzvkRdSQiqVHhjWFCM; expires=Thu,
+        04-Dec-2014 13:52:42 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - amaranth
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
+                "name":             "Joes Smith",
+                "customer_code":    "Joe-R47E",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joes",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
+                "deleted_at":               "",
+                "balance":                  "-210.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@spreecommerce.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:42 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64&page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:43 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=Mph6UuKyRcYT3kFgxamWB3axXdt:YED4dDohauc6JJfN4LiIlZ8QI8z; expires=Thu,
+        04-Dec-2014 13:52:43 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - maroon
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+                "customers"    :   [        {
+                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
+                "name":             "Joes Smith",
+                "customer_code":    "Joe-R47E",
+                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "customer_group_name":       "All Customers",
+                "first_name":             "Joes",
+                "last_name":              "Smith",
+                "company_name":           "",
+                "phone":                  "0000000000",
+                "mobile":                 "",
+                "fax":                    "",
+                "email":                  "spree@spreecommerce.com",
+                "twitter":                "",
+                "website" :               "",
+                "physical_address1":      "1234 Awesome Street",
+                "physical_address2":      "",
+                "physical_suburb":        "",
+                "physical_city":          "Hollywood",
+                "physical_postcode":      "90210",
+                "physical_state":         "California",
+                "physical_country_id":    "US",
+                "postal_address1":        "1234 Awesome Street",
+                "postal_address2":        "",
+                "postal_suburb":          "",
+                "postal_city":            "Hollywood",
+                "postal_postcode":        "90210",
+                "postal_state":           "California",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
+                "deleted_at":               "",
+                "balance":                  "-210.000",
+                "year_to_date":             "210.00000",
+                "date_of_birth":            "",
+                "sex":                      "",
+                "custom_field_1":           "",
+                "custom_field_2":           "",
+                "custom_field_3":           "",
+                "custom_field_4":           "",
+                "note":                     "",
+                "contact":  {
+                    "company_name":     "",
+                    "phone":            "0000000000",
+                    "email":            "spree@spreecommerce.com"
+                    }
+                }
+                ]
+        }
+    http_version: 
+  recorded_at: Thu, 27 Nov 2014 13:52:43 GMT
+- request:
+    method: get
+    uri: https://user@example.com:123@spree.vendhq.com/api/register_sales?page=3&page_size=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 27 Nov 2014 13:52:44 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=MqyvFyyx1lJjoekwfAv4sbieBQb:Uuyg7OK9bPRUMBeN4xDscNyjNQT; expires=Thu,
+        04-Dec-2014 13:52:44 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
+      X-Hue:
+      - chestnut
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "pagination":
+                {
+                "results" : 26,
+                "page" :    3,
+                "page_size" : 10,
+                "pages" :   3        },
+            "register_sales"    :   [    {   "id":  "R3322223463305228",
                 "register_id":          "b8ca3a64-f8f4-11e4-e0f5-13fc9950aba0",
                 "market_id":            "3",
                 "customer_id":          "b8ca3a64-f879-11e4-e0f5-13fcfede68e0",
@@ -3355,10 +5581,10 @@ http_interactions:
                 ]
         }
     http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:05 GMT
+  recorded_at: Thu, 27 Nov 2014 13:52:45 GMT
 - request:
     method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/products?handle=shipping&sku=shipping
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-13fcfede68e0&page_size=100
     body:
       encoding: US-ASCII
       string: ''
@@ -3375,7 +5601,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 27 Nov 2014 11:59:06 GMT
+      - Thu, 27 Nov 2014 13:52:46 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -3393,268 +5619,46 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=15638400; includeSubDomains
       Set-Cookie:
-      - vend=RGtGfLs49uShcLODHj01c8fIqNI:4d0RcVcAVUb8obfDxXw9dX1wPal; expires=Thu,
-        04-Dec-2014 11:59:06 GMT; path=/; domain=vendhq.com; secure; httponly
+      - vend=6ltAhRP2Yl6kHXDdAkagvczeTHY:aSfxpmj9UUyQbbFlJbgu2MK6DSL; expires=Thu,
+        04-Dec-2014 13:52:46 GMT; path=/; domain=vendhq.com; secure; httponly
       X-Hue:
       - flame
     body:
       encoding: UTF-8
       string: |-
         {
-                "products"    :   [        {
-        "id":               "b8ca3a64-f879-11e4-e0f5-143ac22325a9",
-        "source_id":        "",
-        "variant_source_id": "",
-        "handle":           "shipping",
-        "type":           "",
-        "variant_parent_id":  "",
-        "variant_option_one_name": "",
-        "variant_option_one_value": "",
-        "variant_option_two_name": "",
-        "variant_option_two_value": "",
-        "variant_option_three_name": "",
-        "variant_option_three_value": "",
-        "active":           true,
-        "name":             "shipping",
-        "base_name":        "shipping",
-        "description":      "",
-        "image":            "https:\/\/spree.vendhq.com\/images\/placeholder\/product\/no-image-white-thumb.png",
-        "image_large":      "https:\/\/spree.vendhq.com\/images\/placeholder\/product\/no-image-white-original.png",
-        "images":           [],
-        "sku":              "shipping",
-        "tags":             "",
-        "brand_id":         "",
-        "brand_name":       "",
-        "supplier_name":    "",
-        "supplier_code":    "",
-        "supply_price":     "0.00",
-        "account_code_purchase":     "",
-        "account_code_sales":        "",
-        "track_inventory":           false,
-            "price_book_entries":    [    {
-                "id"                :       "eb24f828-7c36-0fa6-2ac9-9122def330ef",
-                "product_id"        :       "b8ca3a64-f879-11e4-e0f5-143ac22325a9",
-                "price_book_id"     :       "b8ca3a64-f8f4-11e4-e0f5-13fc99403fa9",
-                "price_book_name"   :       "General Price Book (All Products)",
-                "type"              :       "BASE",
-                "outlet_name"       :       "",
-                "outlet_id"         :       "",
-                "customer_group_name" :       "All Customers",
-                "customer_group_id" :       "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "price"             :       0,
-                "loyalty_value"     :       null,
-                "tax"               :       0,
-                "tax_id"            :       "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
-                "tax_rate"          :       0,
-                "tax_name"          :       "TAX",
-                "display_retail_price_tax_inclusive"          :       0,
-                "min_units"         :       "",
-                "max_units"         :       "",
-                "valid_from"        :       "",
-                "valid_to"          :       ""
-            }],
-        "price":            0,
-        "tax":              0,
-        "tax_id":           "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
-        "tax_rate" :        0,
-        "tax_name" :        "TAX",
-        "taxes" : [{"outlet_id":"b8ca3a64-f8f4-11e4-e0f5-13fc994fce37","tax_id":"b8ca3a64-f879-11e4-e0f5-14304f5c6b69"}],
-        "display_retail_price_tax_inclusive"          :       0,
-        "updated_at":       "2014-07-25 20:32:12",
-        "deleted_at":       ""
-        }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:06 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/products?handle=vend-discount&sku=vend-discount
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:07 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=8mtq1p5rybSlgCZYjcxv3NDCEmm:HBy0xDpnlnqHR69dhVbozQIF98l; expires=Thu,
-        04-Dec-2014 11:59:07 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - amaranth
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "products"    :   [        {
-        "id":               "b8ca3a64-f879-11e4-e0f5-14090547c535",
-        "source_id":        "",
-        "variant_source_id": "",
-        "handle":           "vend-discount",
-        "type":           "",
-        "variant_parent_id":  "",
-        "variant_option_one_name": "",
-        "variant_option_one_value": "",
-        "variant_option_two_name": "",
-        "variant_option_two_value": "",
-        "variant_option_three_name": "",
-        "variant_option_three_value": "",
-        "active":           true,
-        "name":             "Discount",
-        "base_name":        "Discount",
-        "description":      "Discount product",
-        "image":            "https:\/\/spree.vendhq.com\/images\/placeholder\/product\/no-image-white-thumb.png",
-        "image_large":      "https:\/\/spree.vendhq.com\/images\/placeholder\/product\/no-image-white-original.png",
-        "images":           [],
-        "sku":              "vend-discount",
-        "tags":             "",
-        "brand_id":         "",
-        "brand_name":       "",
-        "supplier_name":    "",
-        "supplier_code":    "",
-        "supply_price":     "0.00",
-        "account_code_purchase":     "",
-        "account_code_sales":        "",
-        "track_inventory":           false,
-            "price_book_entries":    [    {
-                "id"                :       "848c76a7-89ee-bd54-e359-a53bc50339e7",
-                "product_id"        :       "b8ca3a64-f879-11e4-e0f5-14090547c535",
-                "price_book_id"     :       "b8ca3a64-f8f4-11e4-e0f5-13fc99403fa9",
-                "price_book_name"   :       "General Price Book (All Products)",
-                "type"              :       "BASE",
-                "outlet_name"       :       "",
-                "outlet_id"         :       "",
-                "customer_group_name" :       "All Customers",
-                "customer_group_id" :       "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "price"             :       0,
-                "loyalty_value"     :       null,
-                "tax"               :       0,
-                "tax_id"            :       "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
-                "tax_rate"          :       0,
-                "tax_name"          :       "TAX",
-                "display_retail_price_tax_inclusive"          :       0,
-                "min_units"         :       "",
-                "max_units"         :       "",
-                "valid_from"        :       "",
-                "valid_to"          :       ""
-            }],
-        "price":            0,
-        "tax":              0,
-        "tax_id":           "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
-        "tax_rate" :        0,
-        "tax_name" :        "TAX",
-        "taxes" : [{"outlet_id":"b8ca3a64-f8f4-11e4-e0f5-13fc994fce37","tax_id":"b8ca3a64-f879-11e4-e0f5-14304f5c6b69"}],
-        "display_retail_price_tax_inclusive"          :       0,
-        "updated_at":       "2014-07-25 14:36:11",
-        "deleted_at":       ""
-        }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:07 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:08 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=CVi9p2ikC85dVVMkbNTEygUsPV:Yqh3BXy40ZgSHsr9dPc7F1pqfZv; expires=Thu,
-        04-Dec-2014 11:59:08 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - claret
-    body:
-      encoding: UTF-8
-      string: |-
-        {
                 "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
+                "id":               "b8ca3a64-f879-11e4-e0f5-13fcfede68e0",
+                "name":             "Reinaldo Braga",
+                "customer_code":    "rei123",
                 "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
                 "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
+                "first_name":             "Reinaldo",
+                "last_name":              "Braga",
                 "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
+                "phone":                  "5511984244281",
+                "mobile":                 "5511984244281",
                 "fax":                    "",
-                "email":                  "spree@example.com",
+                "email":                  "reinaldo@spreecommerce.com",
                 "twitter":                "",
                 "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "physical_address1":      "Rua dos Aquitib\u00e1s, 27 - Apto 204",
+                "physical_address2":      "Jd S\u00e3o Paulo",
+                "physical_suburb":        "Americana",
+                "physical_city":          "Americana",
+                "physical_postcode":      "13468-170",
+                "physical_state":         "S\u00e3o Paulo",
+                "physical_country_id":    "BR",
+                "postal_address1":        "Rua dos Jequitib\u00e1s, 27 - Apto 204",
+                "postal_address2":        "Jd S\u00e3o Paulo",
+                "postal_suburb":          "Americana",
+                "postal_city":            "Americana",
+                "postal_postcode":        "13468-170",
+                "postal_state":           "S\u00e3o Paulo",
+                "postal_country_id" :     "BR",        "updated_at":               "2014-08-14 12:41:44",
                 "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
+                "balance":                  "4.950",
+                "year_to_date":             "0.00000",
                 "date_of_birth":            "",
                 "sex":                      "",
                 "custom_field_1":           "",
@@ -3664,17 +5668,17 @@ http_interactions:
                 "note":                     "",
                 "contact":  {
                     "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
+                    "phone":            "5511984244281",
+                    "email":            "reinaldo@spreecommerce.com"
                     }
                 }
                 ]
         }
     http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:09 GMT
+  recorded_at: Thu, 27 Nov 2014 13:52:46 GMT
 - request:
     method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64&page_size=100
     body:
       encoding: US-ASCII
       string: ''
@@ -3691,7 +5695,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 27 Nov 2014 11:59:10 GMT
+      - Thu, 27 Nov 2014 13:52:47 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -3709,8 +5713,8 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=15638400; includeSubDomains
       Set-Cookie:
-      - vend=MBi8L9xzNw4k6y86DwKrlOpM5LF:2RqfunwXq8bU6bM0jko5jdyDqA2; expires=Thu,
-        04-Dec-2014 11:59:10 GMT; path=/; domain=vendhq.com; secure; httponly
+      - vend=S0HXYHGZzcEkxF51kJdoYa3Tqd9:aCONUgPUUKkzetDZ8V1VIJ4kZ1n; expires=Thu,
+        04-Dec-2014 13:52:47 GMT; path=/; domain=vendhq.com; secure; httponly
       X-Hue:
       - amaranth
     body:
@@ -3718,18 +5722,18 @@ http_interactions:
       string: |-
         {
                 "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
+                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
+                "name":             "Joes Smith",
+                "customer_code":    "Joe-R47E",
                 "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
                 "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
+                "first_name":             "Joes",
                 "last_name":              "Smith",
                 "company_name":           "",
                 "phone":                  "0000000000",
                 "mobile":                 "",
                 "fax":                    "",
-                "email":                  "spree@example.com",
+                "email":                  "spree@spreecommerce.com",
                 "twitter":                "",
                 "website" :               "",
                 "physical_address1":      "1234 Awesome Street",
@@ -3745,9 +5749,9 @@ http_interactions:
                 "postal_city":            "Hollywood",
                 "postal_postcode":        "90210",
                 "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
                 "deleted_at":               "",
-                "balance":                  "0.000",
+                "balance":                  "-210.000",
                 "year_to_date":             "210.00000",
                 "date_of_birth":            "",
                 "sex":                      "",
@@ -3759,16 +5763,16 @@ http_interactions:
                 "contact":  {
                     "company_name":     "",
                     "phone":            "0000000000",
-                    "email":            "spree@example.com"
+                    "email":            "spree@spreecommerce.com"
                     }
                 }
                 ]
         }
     http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:10 GMT
+  recorded_at: Thu, 27 Nov 2014 13:52:47 GMT
 - request:
     method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-181e79a871e6&page_size=100
     body:
       encoding: US-ASCII
       string: ''
@@ -3785,7 +5789,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 27 Nov 2014 11:59:11 GMT
+      - Thu, 27 Nov 2014 13:52:48 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -3803,102 +5807,8 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=15638400; includeSubDomains
       Set-Cookie:
-      - vend=O8VDSTWEGk8fpO15IwlD5JQtG3C:FwzHPrZUUnK68gXOIVw6sbh8W; expires=Thu, 04-Dec-2014
-        11:59:11 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - claret
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@example.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:12 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:12 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=WUVS722IbrtO7UBMUfebLLpInr2:3bPuNYsDO6ggf16J6Ko6q75PBJf; expires=Thu,
-        04-Dec-2014 11:59:12 GMT; path=/; domain=vendhq.com; secure; httponly
+      - vend=IKUTnqaBIFlryrKrw8AHRC1xjHE:8UI9FfZfDEHoRThrHQ9v0BsIU8h; expires=Thu,
+        04-Dec-2014 13:52:48 GMT; path=/; domain=vendhq.com; secure; httponly
       X-Hue:
       - maroon
     body:
@@ -3906,9 +5816,9 @@ http_interactions:
       string: |-
         {
                 "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
+                "id":               "bc305bf6-6179-11e4-f15a-181e79a871e6",
                 "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
+                "customer_code":    "Joe-2Z7V",
                 "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
                 "customer_group_name":       "All Customers",
                 "first_name":             "Joe",
@@ -3917,7 +5827,7 @@ http_interactions:
                 "phone":                  "0000000000",
                 "mobile":                 "",
                 "fax":                    "",
-                "email":                  "spree@example.com",
+                "email":                  "spree+1@spreecommerce.com",
                 "twitter":                "",
                 "website" :               "",
                 "physical_address1":      "1234 Awesome Street",
@@ -3933,10 +5843,10 @@ http_interactions:
                 "postal_city":            "Hollywood",
                 "postal_postcode":        "90210",
                 "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
+                "postal_country_id" :     "US",        "updated_at":               "2014-07-30 19:19:49",
                 "deleted_at":               "",
                 "balance":                  "0.000",
-                "year_to_date":             "210.00000",
+                "year_to_date":             "0.00000",
                 "date_of_birth":            "",
                 "sex":                      "",
                 "custom_field_1":           "",
@@ -3947,16 +5857,16 @@ http_interactions:
                 "contact":  {
                     "company_name":     "",
                     "phone":            "0000000000",
-                    "email":            "spree@example.com"
+                    "email":            "spree+1@spreecommerce.com"
                     }
                 }
                 ]
         }
     http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:13 GMT
+  recorded_at: Thu, 27 Nov 2014 13:52:48 GMT
 - request:
     method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
     body:
       encoding: US-ASCII
       string: ''
@@ -3973,7 +5883,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 27 Nov 2014 11:59:14 GMT
+      - Thu, 27 Nov 2014 13:52:49 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -3991,479 +5901,8 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=15638400; includeSubDomains
       Set-Cookie:
-      - vend=S1eaPV6Ym4qbyYnB9ABsxiB3N4J:2tNJHupymTaHF5BZ3pfyvoPOds2; expires=Thu,
-        04-Dec-2014 11:59:14 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - maroon
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@example.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:14 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:15 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=VF1R6ev5cM1sq6qGRT7xIOGpXlZ:7JmaLNW7NeY4sE5O14S5LO3dXKJ; expires=Thu,
-        04-Dec-2014 11:59:15 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - amaranth
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@example.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:15 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:16 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=X2Ur9UgeIJfJrKED6aKF9lgTckh:I2MfCccfDiYdSNxsiZLzgHUes4i; expires=Thu,
-        04-Dec-2014 11:59:16 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
-        httponly
-      X-Hue:
-      - chestnut
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@example.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:16 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:17 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=AXpnTt92K3KxKlIesEDOdjym5K5:E6W0Z5DVCarzQQLaiFRObhhGWm1; expires=Thu,
-        04-Dec-2014 11:59:17 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - amaranth
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@example.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:18 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:19 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=FCXWaAla46geKyVicFCsU4fmdEx:WEUQvAibNyjUPY8wcEUhhgR8enj; expires=Thu,
-        04-Dec-2014 11:59:19 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - red
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@example.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:19 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:20 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=6jLw0qMkyOn7U3PDwR5pL0cuzQB:GjBJL8VHI6S5un6PONTT5mUDTAB; expires=Thu,
-        04-Dec-2014 11:59:20 GMT; path=/; domain=vendhq.com; secure; httponly
+      - vend=UvbbG0uMq8ELZiiQJhoyWjDnvS6:2bxSBD2tUfNop5OyQK9DxnVuNOV; expires=Thu,
+        04-Dec-2014 13:52:49 GMT; path=/; domain=vendhq.com; secure; httponly
       X-Hue:
       - rose
     body:
@@ -4518,10 +5957,10 @@ http_interactions:
                 ]
         }
     http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:20 GMT
+  recorded_at: Thu, 27 Nov 2014 13:52:50 GMT
 - request:
     method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7&page_size=100
     body:
       encoding: US-ASCII
       string: ''
@@ -4538,7 +5977,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 27 Nov 2014 11:59:21 GMT
+      - Thu, 27 Nov 2014 13:52:51 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -4556,386 +5995,8 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=15638400; includeSubDomains
       Set-Cookie:
-      - vend=6RmrSYUDmFT8jpcoO4YYpYJ5JVL:1toXqM7pGsEWBRCRSqWxzsg9jxE; expires=Thu,
-        04-Dec-2014 11:59:21 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - claret
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@example.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:22 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:23 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=YA9iRJvzAbrwSfWLEL4OQM5dH13:8wuO0Z6j2k5B2wMv9l3rYaNUMVM; expires=Thu,
-        04-Dec-2014 11:59:23 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
-        httponly
-      X-Hue:
-      - chestnut
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@example.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:23 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-13fcfede68e0
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:24 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=YoP9fzB8q5zfEo005ZVLiqSHZHN:F0jp07vr17QT1AnaYTx1Ms8fK49; expires=Thu,
-        04-Dec-2014 11:59:24 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
-        httponly
-      X-Hue:
-      - web-m3c8
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-13fcfede68e0",
-                "name":             "Reinaldo Braga",
-                "customer_code":    "rei123",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Reinaldo",
-                "last_name":              "Braga",
-                "company_name":           "",
-                "phone":                  "5511984244281",
-                "mobile":                 "5511984244281",
-                "fax":                    "",
-                "email":                  "reinaldo@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "Rua dos Aquitib\u00e1s, 27 - Apto 204",
-                "physical_address2":      "Jd S\u00e3o Paulo",
-                "physical_suburb":        "Americana",
-                "physical_city":          "Americana",
-                "physical_postcode":      "13468-170",
-                "physical_state":         "S\u00e3o Paulo",
-                "physical_country_id":    "BR",
-                "postal_address1":        "Rua dos Jequitib\u00e1s, 27 - Apto 204",
-                "postal_address2":        "Jd S\u00e3o Paulo",
-                "postal_suburb":          "Americana",
-                "postal_city":            "Americana",
-                "postal_postcode":        "13468-170",
-                "postal_state":           "S\u00e3o Paulo",
-                "postal_country_id" :     "BR",        "updated_at":               "2014-08-14 12:41:44",
-                "deleted_at":               "",
-                "balance":                  "4.950",
-                "year_to_date":             "0.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "5511984244281",
-                    "email":            "reinaldo@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:24 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:25 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=PTI6e3jX6VDDPkr9mujOcjMr7uz:8IJBM052x3RmGiCKSPOswbWyPjQ; expires=Thu,
-        04-Dec-2014 11:59:25 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - red
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
-                "name":             "Joes Smith",
-                "customer_code":    "Joe-R47E",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joes",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
-                "deleted_at":               "",
-                "balance":                  "-210.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:26 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:27 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=RP7EQq4McjdHtWTA95R9GLxxT5y:RrS59wWVSuo0Ffz0hIEN6WTLHw9; expires=Thu,
-        04-Dec-2014 11:59:27 GMT; path=/; domain=vendhq.com; secure; httponly
+      - vend=FTIFN9ALYEFsAmBTA5XPzFHVV9O:6ACYPwCUREfuLRHVjESDFq7nT5u; expires=Thu,
+        04-Dec-2014 13:52:51 GMT; path=/; domain=vendhq.com; secure; httponly
       X-Hue:
       - flame
     body:
@@ -4943,852 +6004,6 @@ http_interactions:
       string: |-
         {
                 "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
-                "name":             "Joes Smith",
-                "customer_code":    "Joe-R47E",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joes",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
-                "deleted_at":               "",
-                "balance":                  "-210.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:27 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:28 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=Gcuu19StSlLE1aXkEz3sldza7Cd:LapB3X1fHIscvrMkV1GjzCvRmJB; expires=Thu,
-        04-Dec-2014 11:59:28 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - maroon
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
-                "name":             "Joes Smith",
-                "customer_code":    "Joe-R47E",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joes",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
-                "deleted_at":               "",
-                "balance":                  "-210.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:28 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:29 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=H61fvENrPvl75Y3EJKq1NJrjTw0:INE2FXhTNOa9ij201EYV5bp3YKF; expires=Thu,
-        04-Dec-2014 11:59:29 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - flame
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
-                "name":             "Joes Smith",
-                "customer_code":    "Joe-R47E",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joes",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
-                "deleted_at":               "",
-                "balance":                  "-210.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:29 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:30 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=BGTcI60LytoK9tByF4ZQun9P662:GVuBVqPSr4uwDPcUReVfcBmuUE6; expires=Thu,
-        04-Dec-2014 11:59:30 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - amaranth
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
-                "name":             "Joes Smith",
-                "customer_code":    "Joe-R47E",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joes",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
-                "deleted_at":               "",
-                "balance":                  "-210.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:31 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:32 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=7oGtMSWimH7vDLLmOuAP9llwSfD:OlpwBkPt1CsJHLviDB7aWpvPk2i; expires=Thu,
-        04-Dec-2014 11:59:32 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - maroon
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
-                "name":             "Joes Smith",
-                "customer_code":    "Joe-R47E",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joes",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
-                "deleted_at":               "",
-                "balance":                  "-210.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:32 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:33 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=O3qWloG1maJHpG2UfgaXxojmv0c:Iti0NRrge7WG9w8T0wnwaBIrqcq; expires=Thu,
-        04-Dec-2014 11:59:33 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - maroon
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
-                "name":             "Joes Smith",
-                "customer_code":    "Joe-R47E",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joes",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
-                "deleted_at":               "",
-                "balance":                  "-210.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:33 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-13fcfede68e0
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:34 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=XgCvoXIglXGziwuWmMGeoUzaFm3:ImfakMh00eZc9nO0uSDLJhdzdyV; expires=Thu,
-        04-Dec-2014 11:59:34 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - claret
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-13fcfede68e0",
-                "name":             "Reinaldo Braga",
-                "customer_code":    "rei123",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Reinaldo",
-                "last_name":              "Braga",
-                "company_name":           "",
-                "phone":                  "5511984244281",
-                "mobile":                 "5511984244281",
-                "fax":                    "",
-                "email":                  "reinaldo@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "Rua dos Aquitib\u00e1s, 27 - Apto 204",
-                "physical_address2":      "Jd S\u00e3o Paulo",
-                "physical_suburb":        "Americana",
-                "physical_city":          "Americana",
-                "physical_postcode":      "13468-170",
-                "physical_state":         "S\u00e3o Paulo",
-                "physical_country_id":    "BR",
-                "postal_address1":        "Rua dos Jequitib\u00e1s, 27 - Apto 204",
-                "postal_address2":        "Jd S\u00e3o Paulo",
-                "postal_suburb":          "Americana",
-                "postal_city":            "Americana",
-                "postal_postcode":        "13468-170",
-                "postal_state":           "S\u00e3o Paulo",
-                "postal_country_id" :     "BR",        "updated_at":               "2014-08-14 12:41:44",
-                "deleted_at":               "",
-                "balance":                  "4.950",
-                "year_to_date":             "0.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "5511984244281",
-                    "email":            "reinaldo@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:34 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=b8ca3a64-f879-11e4-e0f5-1426b0c0ce64
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:35 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=KsKkfpDWstyv9NW4IwmGh61WVf4:ZgFQoYupzboGxoWs77LqOWB1Pru; expires=Thu,
-        04-Dec-2014 11:59:35 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - red
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "b8ca3a64-f879-11e4-e0f5-1426b0c0ce64",
-                "name":             "Joes Smith",
-                "customer_code":    "Joe-R47E",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joes",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 17:12:05",
-                "deleted_at":               "",
-                "balance":                  "-210.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:35 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-181e79a871e6
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:36 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=OblD104zXNsc9yHYjQe97M6tb6G:HUUY5JabMTsRpVUylsxAu1qVLcz; expires=Thu,
-        04-Dec-2014 11:59:36 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - claret
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-181e79a871e6",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-2Z7V",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree+1@spreecommerce.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-07-30 19:19:49",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "0.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree+1@spreecommerce.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:37 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:37 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=LUcGCpbkLFJ9VirfPHddBq1ZO9s:OxLOPmh5sOxSDCWW1fhv0okLJQl; expires=Thu,
-        04-Dec-2014 11:59:37 GMT; path=/; domain=vendhq.com; secure; httponly
-      X-Hue:
-      - claret
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
                 "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
                 "name":             "Joe Smith",
                 "customer_code":    "Joe-8QN2",
@@ -5836,10 +6051,10 @@ http_interactions:
                 ]
         }
     http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:38 GMT
+  recorded_at: Thu, 27 Nov 2014 13:52:51 GMT
 - request:
     method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-175e1c24e9a7
+    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-169f12827506&page_size=100
     body:
       encoding: US-ASCII
       string: ''
@@ -5856,7 +6071,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 27 Nov 2014 11:59:39 GMT
+      - Thu, 27 Nov 2014 13:52:52 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -5874,106 +6089,10 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=15638400; includeSubDomains
       Set-Cookie:
-      - vend=5w8qFkKumW6YAm2GhvD4l9ICZ54:Uf1djySfyFWdWiuuV1JI9gAVLA4; expires=Thu,
-        04-Dec-2014 11:59:39 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
-        httponly
+      - vend=FJ5SCv7WZZn6tscuRnirUXNYWiL:H8zm63u9vxlLENrg9uevRdxQmmI; expires=Thu,
+        04-Dec-2014 13:52:52 GMT; path=/; domain=vendhq.com; secure; httponly
       X-Hue:
-      - chestnut
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-                "customers"    :   [        {
-                "id":               "bc305bf6-6179-11e4-f15a-175e1c24e9a7",
-                "name":             "Joe Smith",
-                "customer_code":    "Joe-8QN2",
-                "customer_group_id":         "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
-                "customer_group_name":       "All Customers",
-                "first_name":             "Joe",
-                "last_name":              "Smith",
-                "company_name":           "",
-                "phone":                  "0000000000",
-                "mobile":                 "",
-                "fax":                    "",
-                "email":                  "spree@example.com",
-                "twitter":                "",
-                "website" :               "",
-                "physical_address1":      "1234 Awesome Street",
-                "physical_address2":      "",
-                "physical_suburb":        "",
-                "physical_city":          "Hollywood",
-                "physical_postcode":      "90210",
-                "physical_state":         "California",
-                "physical_country_id":    "US",
-                "postal_address1":        "1234 Awesome Street",
-                "postal_address2":        "",
-                "postal_suburb":          "",
-                "postal_city":            "Hollywood",
-                "postal_postcode":        "90210",
-                "postal_state":           "California",
-                "postal_country_id" :     "US",        "updated_at":               "2014-08-14 12:40:48",
-                "deleted_at":               "",
-                "balance":                  "0.000",
-                "year_to_date":             "210.00000",
-                "date_of_birth":            "",
-                "sex":                      "",
-                "custom_field_1":           "",
-                "custom_field_2":           "",
-                "custom_field_3":           "",
-                "custom_field_4":           "",
-                "note":                     "",
-                "contact":  {
-                    "company_name":     "",
-                    "phone":            "0000000000",
-                    "email":            "spree@example.com"
-                    }
-                }
-                ]
-        }
-    http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:39 GMT
-- request:
-    method: get
-    uri: https://user@example.com:123@spree.vendhq.com/api/customers?id=bc305bf6-6179-11e4-f15a-169f12827506
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 27 Nov 2014 11:59:40 GMT
-      Content-Type:
-      - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Expires:
-      - Sun, 12 Oct 1986 08:52:00 GMT
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
-      Strict-Transport-Security:
-      - max-age=15638400; includeSubDomains
-      Set-Cookie:
-      - vend=PPW3kHe5Qx4cao9SsRh7oJcL2Oz:LgL32eFIED5OFEdjXhgRDUTGH4C; expires=Thu,
-        04-Dec-2014 11:59:40 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
-        httponly
-      X-Hue:
-      - chestnut
+      - rose
     body:
       encoding: UTF-8
       string: |-
@@ -6026,5 +6145,5 @@ http_interactions:
                 ]
         }
     http_version: 
-  recorded_at: Thu, 27 Nov 2014 11:59:40 GMT
+  recorded_at: Thu, 27 Nov 2014 13:52:52 GMT
 recorded_with: VCR 2.6.0

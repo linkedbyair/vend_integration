@@ -90,38 +90,28 @@ module Vend
     end
 
     def get_customers(poll_customer_timestamp)
-      customers      = []
-      has_more_pages = false
-      page           = 1
-
-      begin
-        response  = retrieve_customers(poll_customer_timestamp, nil, nil, page)
-
-        (response['customers'] || []).each_with_index.map do |customer, i|
-          customers << Vend::CustomerBuilder.parse_customer(customer)
-        end
-
-        page           = page + 1 if response.has_key?('pagination')
-        has_more_pages = response.has_key?('pagination')
-        has_more_pages = page <= response['pagination']['pages'] if response.has_key?('pagination')
-      end while has_more_pages
-
-      customers
+      response  = retrieve_customers(poll_customer_timestamp, nil, nil)
+      response['customers'].to_a.map{ |customer| Vend::CustomerBuilder.parse_customer(customer) }
     end
 
     def get_orders(poll_order_timestamp)
       options = {
         headers: headers,
-        basic_auth: auth
-      }
-      options[:query] = {since: poll_order_timestamp} if poll_order_timestamp
-
-      response = self.class.get('/register_sales', options)
-      validate_response(response)
+        basic_auth: auth,
+          query: { page_size: 10 }
+        }
+      options[:query][:since]= poll_order_timestamp if poll_order_timestamp
 
       orders = []
-      (response['register_sales'] || []).each_with_index.map do |order, i|
-        orders << Vend::OrderBuilder.parse_order(order, self)
+      paginate(options) do
+
+        response = self.class.get('/register_sales', options)
+        validate_response(response)
+
+        orders = orders.
+          concat(response['register_sales'].to_a.map{|order| Vend::OrderBuilder.parse_order(order, self) })
+
+        response
       end
       orders
     end
@@ -171,18 +161,26 @@ module Vend
       @registers[register_name]
     end
 
-    def retrieve_customers(poll_customer_timestamp, email, id, page=1)
+    def retrieve_customers(poll_customer_timestamp, email, id)
       options = {
         headers: headers,
         basic_auth: auth,
+        query: { page_size: 100 }
       }
-      options[:query]         = {} if poll_customer_timestamp || email || id
       options[:query][:since] = poll_customer_timestamp if poll_customer_timestamp
       options[:query][:email] = email if email
       options[:query][:id]    = id if id
 
-      response = self.class.get('/customers', options)
-      validate_response(response)
+      customers = { 'customers'=>[] }
+      paginate(options) do
+
+        response = self.class.get('/customers', options)
+        validate_response(response)
+
+        customers['customers'] = customers['customers'].concat(response['customers'])
+        response
+      end
+      customers
     end
 
     def retrieve_products(poll_product_timestamp)
@@ -192,22 +190,16 @@ module Vend
         query: { page_size: 100 }
       }
       options[:query][:since]= poll_product_timestamp if poll_product_timestamp
+
       products = { 'products'=>[] }
-      begin
+      paginate(options) do
 
         response = self.class.get('/products', options)
         validate_response(response)
 
         products['products'] = products['products'].concat(response['products'])
-
-        if response.has_key?('pagination') && response['pagination']['page'] < response['pagination']['pages']
-          options[:query][:page]= response['pagination']['page']+1
-          has_more_pages = true
-        else
-          has_more_pages = false
-        end
-
-      end while has_more_pages
+        response
+      end
       products
     end
 
@@ -242,6 +234,21 @@ module Vend
     end
 
     private
+
+    def paginate(options)
+      begin
+
+        response = yield
+
+        if response.has_key?('pagination') && response['pagination']['page'] < response['pagination']['pages']
+          options[:query][:page]= response['pagination']['page']+1
+          has_more_pages = true
+        else
+          has_more_pages = false
+        end
+
+      end while has_more_pages
+    end
 
     def validate_response(response)
       raise VendEndpointError, response if Vend::ErrorParser.response_has_errors?(response)
