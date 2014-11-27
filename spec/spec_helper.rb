@@ -1,7 +1,9 @@
 require 'rubygems'
 require 'bundler'
 require 'sinatra'
+require 'dotenv'
 
+Dotenv.load
 Bundler.require(:default, :test)
 
 require 'simplecov'
@@ -22,6 +24,10 @@ end
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :webmock
+
+  c.filter_sensitive_data("spree")            { ENV["VEND_SITE_ID"] }
+  c.filter_sensitive_data("user@example.com") { ENV["VEND_USER"].gsub('+','%2B').gsub('@','%40') }
+  c.filter_sensitive_data("123")              { ENV["VEND_PASSWORD"] }
 end
 
 RSpec.configure do |config|

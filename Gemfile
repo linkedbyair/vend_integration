@@ -19,6 +19,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
   gem 'simplecov', require: false
+  gem 'dotenv'
 end
 
 group :test do
