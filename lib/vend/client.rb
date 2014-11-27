@@ -188,13 +188,27 @@ module Vend
     def retrieve_products(poll_product_timestamp)
       options = {
         headers: headers,
-        basic_auth: auth
+        basic_auth: auth,
+        query: { page_size: 100 }
       }
-      options[:query] = {since: poll_product_timestamp} if poll_product_timestamp
+      options[:query][:since]= poll_product_timestamp if poll_product_timestamp
+      products = { 'products'=>[] }
+      begin
 
-      response = self.class.get('/products', options)
+        response = self.class.get('/products', options)
+        validate_response(response)
 
-      validate_response(response)
+        products['products'] = products['products'].concat(response['products'])
+
+        if response.has_key?('pagination') && response['pagination']['page'] < response['pagination']['pages']
+          options[:query][:page]= response['pagination']['page']+1
+          has_more_pages = true
+        else
+          has_more_pages = false
+        end
+
+      end while has_more_pages
+      products
     end
 
     def get_discount_product
