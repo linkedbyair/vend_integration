@@ -38,6 +38,8 @@ class VendEndpoint < EndpointBase::Sinatra::Base
         add_object "order", order
       end
 
+      add_parameter 'vend_poll_order_timestamp', Time.now.utc.iso8601
+
       code = 200
       set_summary "#{orders.size} orders were retrieved from Vend POS." if orders.any?
     rescue VendEndpointError => e
@@ -59,6 +61,8 @@ class VendEndpoint < EndpointBase::Sinatra::Base
       products.each do |product|
         add_object "product", product
       end
+
+      add_parameter 'vend_poll_product_timestamp', Time.now.utc.iso8601
 
       code = 200
       set_summary "#{products.size} products were retrieved from Vend POS." if products.any?
@@ -82,6 +86,8 @@ class VendEndpoint < EndpointBase::Sinatra::Base
         add_object "inventory", inventory
       end
 
+      add_parameter 'vend_poll_inventory_timestamp', Time.now.utc.iso8601
+
       code = 200
       set_summary "#{inventories.size} inventories were retrieved from Vend POS." if inventories.any?
     rescue VendEndpointError => e
@@ -103,6 +109,8 @@ class VendEndpoint < EndpointBase::Sinatra::Base
       customers.each do |customer|
         add_object "customer", customer
       end
+
+      add_parameter 'vend_poll_customer_timestamp', Time.now.utc.iso8601
 
       code = 200
       set_summary "#{customers.size} customers were retrieved from Vend POS." if customers.any?
