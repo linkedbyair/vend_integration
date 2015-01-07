@@ -146,6 +146,26 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
+  post %r{(add_product|update_product)$} do
+    begin
+      client   = Vend::Client.new(@config['vend_site_id'], @config['vend_user'], @config['vend_password'])
+      if request.fullpath.match /add_product/
+        @payload[:product]['source_id'] = ( @payload[:product].has_key?('source_id') ? @payload[:product]['source_id'] : @payload[:product]['id'] )
+        @payload[:product].delete('id')
+      end
+      response = client.send_product(@payload[:product])
+      code     = 200
+      set_summary "The product #{@payload[:product][:name]} #{@payload[:product][:name]} was sent to Vend POS."
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
 
   def error_notification(error)
     log_exception(error)
