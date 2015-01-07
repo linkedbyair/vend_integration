@@ -25,6 +25,20 @@ module Vend
       validate_response(response)
     end
 
+    def send_product(payload)
+      product_hash   = Vend::ProductBuilder.build(self, payload)
+
+      options = {
+        headers: headers,
+        basic_auth: auth,
+        body: product_hash.to_json
+      }
+
+      response = self.class.post('/products', options)
+
+      validate_response(response)
+    end
+
     def send_new_customer(payload)
       customer_hash   = Vend::CustomerBuilder.build_new_customer(self, payload)
       send_customer(customer_hash)
@@ -48,28 +62,8 @@ module Vend
 
     def get_products(poll_product_timestamp)
       response  = retrieve_products(poll_product_timestamp)
-      products = []
-      (response['products'] || []).each_with_index.map do |product, i|
-        hash = {
-            :id                 => product['id'],
-            'name'              => product['name'].split("/")[0],
-            'source_id'         => product['source_id'],
-            'sku'               => product['sku'],
-            'description'       => product['description'],
-            'price'             => product['price'],
-            'permalink'         => product['sku'],
-            'meta_keywords'     => product['tags'],
-            'updated_at'        => product['updated_at'],
-            'images'=> [
-              {
-                'url'=> product['image']
-              }
-            ]
-          }
-          hash['taxons'] = [['Brands', product['brand_name']]] if product['brand_name'] && ! product['brand_name'].empty?
-          products << hash
-      end
-      products
+
+      (response['products'] || []).map { |product| Vend::ProductBuilder.parse_product(product) }
     end
 
     def get_inventories(poll_inventory_timestamp)
