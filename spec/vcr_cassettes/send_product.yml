@@ -1,0 +1,116 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://user@example.com:123@spree.vendhq.com/api/products
+    body:
+      encoding: UTF-8
+      string: '{"source_id":12345,"handle":"ROR-TS","tags":null,"name":"Ruby on Rails
+        T-Shirt","description":"Some description xxx text for the product.","sku":"ROR-TS","retail_price":31,"supply_price":null,"brand_name":"Spree"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 07 Jan 2015 18:29:44 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Sun, 12 Oct 1986 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0, private
+      Strict-Transport-Security:
+      - max-age=15638400; includeSubDomains
+      Set-Cookie:
+      - vend=XiSFJFzypIa2gAKxXmab28llfmX:IW4IlmDLUsWWBL6dyfNyHKM5Ef2; expires=Wed,
+        14-Jan-2015 18:29:44 GMT; path=/; domain=vendhq.com; secure; httponly
+      X-Hue:
+      - red
+    body:
+      encoding: UTF-8
+      string: |
+        {
+            "product"    :
+                {
+        "id":               "b8ca3a65-0179-11e4-fbb5-96988028c149",
+        "source_id":        "12345",
+        "variant_source_id": "",
+        "handle":           "ROR-TS",
+        "type":           "",
+        "variant_parent_id":  "",
+        "variant_option_one_name": "",
+        "variant_option_one_value": "",
+        "variant_option_two_name": "",
+        "variant_option_two_value": "",
+        "variant_option_three_name": "",
+        "variant_option_three_value": "",
+        "active":           true,
+        "name":             "Ruby on Rails T-Shirt",
+        "base_name":        "Ruby on Rails T-Shirt",
+        "description":      "Some description xxx text for the product",
+        "image":            "",
+        "image_large":      "",
+        "images":           null,
+        "sku":              "ROR-TS",
+        "tags":             "",
+        "brand_id":         "",
+        "brand_name":       "",
+        "supplier_name":    "",
+        "supplier_code":    "",
+        "supply_price":     "0.00",
+        "account_code_purchase":     "",
+        "account_code_sales":        "",
+        "track_inventory":           true,
+            "inventory": [],
+            "price_book_entries":    [    {
+                "id"                :       "8d2c7fb8-b65f-ef66-1acf-a6da1c6e2eb8",
+                "product_id"        :       "b8ca3a65-0179-11e4-fbb5-96988028c149",
+                "price_book_id"     :       "b8ca3a64-f8f4-11e4-e0f5-13fc99403fa9",
+                "price_book_name"   :       "General Price Book (All Products)",
+                "type"              :       "BASE",
+                "outlet_name"       :       "",
+                "outlet_id"         :       "",
+                "customer_group_name" :       "",
+                "customer_group_id" :       "b8ca3a64-f8f4-11e4-e0f5-13fc993eb002",
+                "price"             :       31,
+                "loyalty_value"     :       null,
+                "tax"               :       0,
+                "tax_id"            :       "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
+                "tax_rate"          :       0,
+                "tax_name"          :       "TAX",
+                "display_retail_price_tax_inclusive"          :       0,
+                "min_units"         :       "",
+                "max_units"         :       "",
+                "valid_from"        :       "",
+                "valid_to"          :       ""
+            }],
+        "price":            31,
+        "tax":              0,
+        "tax_id":           "b8ca3a64-f879-11e4-e0f5-14304f5c6b69",
+        "tax_rate" :        0,
+        "tax_name" :        "TAX",
+        "taxes" : null,
+        "display_retail_price_tax_inclusive"          :       0,
+        "updated_at":       "2015-01-07 13:29:44",
+        "deleted_at":       ""
+        }
+        }
+    http_version: 
+  recorded_at: Wed, 07 Jan 2015 18:29:44 GMT
+recorded_with: VCR 2.6.0

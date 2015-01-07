@@ -10,6 +10,7 @@ describe VendEndpoint do
   end
 
   let(:order) { Factories.order }
+  let(:product) { Factories.product }
   let(:original) { Factories.original }
   let(:params) { Factories.parameters }
 
@@ -100,6 +101,26 @@ describe VendEndpoint do
 
         VCR.use_cassette('send_order') do
           post '/add_order', message, auth
+          last_response.status.should == 200
+          last_response.body.should match /was sent to Vend/
+        end
+      end
+    end
+  end
+
+  describe '/add_product' do
+    let(:order_response) { double("response", :[] => nil, :code => 200) }
+
+    context 'success' do
+      it 'imports new products' do
+        message = {
+          request_id: '123456',
+          product: product,
+          parameters: params
+        }.to_json
+
+        VCR.use_cassette('send_product') do
+          post '/add_product', message, auth
           last_response.status.should == 200
           last_response.body.should match /was sent to Vend/
         end

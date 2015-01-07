@@ -19,7 +19,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 27 Nov 2014 13:52:12 GMT
+      - Wed, 07 Jan 2015 17:55:59 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -37,8 +37,9 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=15638400; includeSubDomains
       Set-Cookie:
-      - vend=Qzx3N6Hf1WsjQfsoib1XGJkC1AU:YhYPDUBbIe9L6pAo3GgRQywgoGP; expires=Thu,
-        04-Dec-2014 13:52:12 GMT; path=/; domain=vendhq.com; secure; httponly
+      - vend=7U9ag9q1IG8BsJbKA1rIVijitVE:9d4xU68EVZcDebA8inLQRV6mzcg; expires=Wed,
+        14-Jan-2015 17:55:59 GMT; Max-Age=604800; path=/; domain=vendhq.com; secure;
+        httponly
       X-Hue:
       - maroon
     body:
@@ -787,5 +788,5 @@ http_interactions:
                 ]
         }
     http_version: 
-  recorded_at: Thu, 27 Nov 2014 13:52:13 GMT
+  recorded_at: Wed, 07 Jan 2015 17:56:00 GMT
 recorded_with: VCR 2.6.0
