@@ -2,12 +2,15 @@ module Vend
   class Client
     include ::HTTParty
 
-    attr_reader :site_id, :headers, :auth
+    attr_reader :site_id, :headers
 
-    def initialize(site_id, user, password)
-      @auth    = {:username => user, :password => password}
+    def initialize(site_id, personal_token)
       @site_id = site_id
-      @headers = { "Content-Type" => "application/json", "Accept" => "application/json" }
+      @headers = {
+          "Content-Type" => "application/json",
+          "Accept" => "application/json",
+          "Authorization" => "Bearer #{personal_token}"
+      }
 
       self.class.base_uri "https://#{site_id}.vendhq.com/api/"
     end
@@ -17,7 +20,6 @@ module Vend
 
       options = {
         headers: headers,
-        basic_auth: auth,
         body: order_placed_hash.to_json
       }
 
@@ -30,7 +32,6 @@ module Vend
 
       options = {
         headers: headers,
-        basic_auth: auth,
         body: product_hash.to_json
       }
 
@@ -52,7 +53,6 @@ module Vend
     def send_customer(customer_hash)
       options = {
         headers: headers,
-        basic_auth: auth,
         body: customer_hash.to_json
       }
 
@@ -91,8 +91,7 @@ module Vend
     def get_orders(poll_order_timestamp)
       options = {
         headers: headers,
-        basic_auth: auth,
-          query: { page_size: 10 }
+        query: { page_size: 10 }
         }
       options[:query][:since]= poll_order_timestamp if poll_order_timestamp
 
@@ -114,8 +113,7 @@ module Vend
       return @payments[payment_method] if @payments
 
       options = {
-        headers: headers,
-        basic_auth: auth
+        headers: headers
       }
 
       response = self.class.get('/payment_types', options)
@@ -142,8 +140,7 @@ module Vend
       return @registers[register_name] if @registers
 
       options = {
-        headers: headers,
-        basic_auth: auth
+        headers: headers
       }
 
       response = self.class.get('/registers', options)
@@ -158,7 +155,6 @@ module Vend
     def retrieve_customers(poll_customer_timestamp, email, id)
       options = {
         headers: headers,
-        basic_auth: auth,
         query: { page_size: 100 }
       }
       options[:query][:since] = poll_customer_timestamp if poll_customer_timestamp
@@ -180,7 +176,6 @@ module Vend
     def retrieve_products(poll_product_timestamp)
       options = {
         headers: headers,
-        basic_auth: auth,
         query: { page_size: 100 }
       }
       options[:query][:since]= poll_product_timestamp if poll_product_timestamp
@@ -201,7 +196,6 @@ module Vend
       unless @discount_product
         options = {
           headers: headers,
-          basic_auth: auth,
           query: {handle: 'vend-discount', sku: 'vend-discount'}
         }
         response = self.class.get('/products', options)
@@ -216,7 +210,6 @@ module Vend
       unless @shipping_product
         options = {
           headers: headers,
-          basic_auth: auth,
           query: {handle: 'shipping', sku: 'shipping'}
         }
         response = self.class.get('/products', options)
