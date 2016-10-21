@@ -1,17 +1,19 @@
 require 'digest'
+require 'active_support/all'
 
 module Vend
   class ProductBuilder
     class << self
       def build(client, payload)
-
+        sku = payload['sku'].presence || "spree-#{payload['source_id']}"
+        handle = [(payload['name']&.parameterize), sku].reject(&:blank?).join('-')
         hash = {
             'source_id'         => payload['source_id'],
-            'handle'            => payload['sku'],
+            'handle'            => handle,
             'tags'              => payload['tags'],
             'name'              => payload['name'],
             'description'       => payload['description'],
-            'sku'               => payload['sku'],
+            'sku'               => sku,
             'retail_price'      => payload['price'],
             'supply_price'      => payload['cost_price'],
             'brand_name'        => get_brand_on_taxons(payload['taxons'])
@@ -45,7 +47,7 @@ module Vend
       private
 
       def get_brand_on_taxons(taxons)
-        taxons.select{ |item| item.first == 'Brands' }.first.drop(1).join("/")
+        (taxons&.select{ |item| item.first == 'Brands' }&.first&.drop(1)&.join('/')) || ''
       end
     end
   end
