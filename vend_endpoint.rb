@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'endpoint_base'
 
-Dir['./lib/**/*.rb'].each &method(:require)
+Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each &method(:require)
 
 class VendEndpoint < EndpointBase::Sinatra::Base
   set :logging, true
