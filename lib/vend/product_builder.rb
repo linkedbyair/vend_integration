@@ -6,7 +6,7 @@ module Vend
     class << self
       def build(client, payload)
         sku = payload['sku'].presence || "spree-#{payload['source_id']}"
-        handle = [(payload['name']&.parameterize), sku].reject(&:blank?).join('-')
+        handle = payload['permalink']
         hash = {
             'source_id'         => payload['source_id'],
             'handle'            => handle,
@@ -20,6 +20,14 @@ module Vend
         }
 
         hash[:id] = payload['id'] if payload.has_key?('id')
+
+        %w(one two three).each_with_index do |opt, index|
+          hash.merge!(
+            "variant_option_#{opt}_name" => payload["options"].keys[index],
+            "variant_option_#{opt}_value" => payload["options"].values[index],
+          )
+        end
+
         hash
       end
 

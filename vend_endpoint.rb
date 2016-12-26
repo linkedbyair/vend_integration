@@ -153,7 +153,12 @@ class VendEndpoint < EndpointBase::Sinatra::Base
         @payload[:product]['source_id'] = ( @payload[:product].has_key?('source_id') ? @payload[:product]['source_id'] : @payload[:product]['id'] )
         @payload[:product].delete('id')
       end
-      response = client.send_product(@payload[:product])
+      @payload[:product]['variants'].each do |variant|
+        product = @payload[:product].dup
+        product.merge!(variant)
+        response = client.send_product(product)
+      end
+
       code     = 200
       set_summary "The product #{@payload[:product][:name]} #{@payload[:product][:name]} was sent to Vend POS."
     rescue VendEndpointError => e
