@@ -14,8 +14,13 @@ module Vend
         alt_po_number: payload["id"],
         arrival_date: payload["date"],
         line_items: line_items,
-        vendor: vendor
+        location: location,
+        vendor: vendor,
       }
+    end
+
+    def location
+      client.find_outlet_by_id(payload["outlet_id"])
     end
 
     def vendor

@@ -138,6 +138,14 @@ module Vend
       @payments[payment_method]
     end
 
+    def find_outlet_by_id(outlet_id)
+      outlets[outlet_id].slice("id", "name")
+    end
+
+    def outlets
+      @outlets ||= self.class.get("/outlets", headers: headers)["outlets"].index_by{|o| o["id"]}
+    end
+
     def find_product_by_id(product_id)
       self.class.get("/products/#{product_id}", headers: headers)["products"].first
     end
