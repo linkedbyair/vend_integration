@@ -109,6 +109,19 @@ module Vend
       orders
     end
 
+    def get_purchase_orders(since:)
+      options = { headers: headers }
+
+      response = self.class.get('/stock_movements', options)
+      validate_response response
+
+      response['stock_movements'].select do |movement|
+        DateTime.parse(movement['updated_at']) > Time.at(since).to_datetime
+      end.map do |movement|
+        Vend::PurchaseOrderBuilder.build(movement, self)
+      end
+    end
+
     def payment_type_id(payment_method)
       return @payments[payment_method] if @payments
 
@@ -123,6 +136,14 @@ module Vend
         @payments[payment_type['name']] = payment_type['id']
       end
       @payments[payment_method]
+    end
+
+    def find_product_by_id(product_id)
+      self.class.get("/products/#{product_id}", headers: headers)["products"].first
+    end
+
+    def find_supplier_by_id(supplier_id)
+      self.class.get("/supplier/#{supplier_id}", headers: headers)
     end
 
     def product_id(product_id)
