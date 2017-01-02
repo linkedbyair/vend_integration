@@ -115,6 +115,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
         add_object "purchase_order", purchase_order
       end
 
+      add_value 'purchase_orders', [] if purchase_orders.count < 1
       code = 200
     rescue VendEndpointError => e
       set_summary "Validation error has ocurred: #{e.message}"
