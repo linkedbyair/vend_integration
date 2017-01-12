@@ -40,6 +40,19 @@ module Vend
       validate_response(response)
     end
 
+    def send_supplier(payload)
+      supplier_hash   = Vend::SupplierBuilder.build(self, payload)
+
+      options = {
+        headers: headers,
+        body: supplier_hash.to_json
+      }
+
+      response = self.class.post('/supplier', options)
+
+      validate_response(response)
+    end
+
     def send_new_customer(payload)
       customer_hash   = Vend::CustomerBuilder.build_new_customer(self, payload)
       send_customer(customer_hash)

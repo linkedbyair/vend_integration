@@ -150,6 +150,19 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
+  post '/add_vendor' do
+    begin
+      response = client.send_supplier(@payload[:vendor])
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
   post %r{(add_customer|update_customer)$} do
     begin
       client   = Vend::Client.new(@config['vend_site_id'], @config['vend_personal_token'])
