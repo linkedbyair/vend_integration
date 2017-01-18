@@ -9,14 +9,9 @@ module Vend
     end
 
     def to_hash
-      {
-        id: payload["name"],
-        alt_po_number: payload["id"],
-        arrival_date: payload["date"],
-        line_items: line_items,
-        location: location,
-        vendor: vendor,
-      }
+      payload.merge(
+        channel: 'Vend'
+      )
     end
 
     def location
@@ -24,7 +19,7 @@ module Vend
     end
 
     def vendor
-      contact = supplier["contact"]
+      contact = supplier["contact"] || {}
       {
         vendorid: supplier["id"],
         name: supplier["name"],
@@ -43,7 +38,7 @@ module Vend
     end
 
     def line_items
-      payload["products"].each_with_index.map do |product, index|
+      Array(payload["products"]).each_with_index.map do |product, index|
         {
           line_number: index,
           itemno: sku(product["product_id"]),

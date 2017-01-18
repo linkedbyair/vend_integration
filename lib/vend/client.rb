@@ -41,7 +41,7 @@ module Vend
     end
 
     def send_supplier(payload)
-      supplier_hash   = Vend::SupplierBuilder.build(self, payload)
+      supplier_hash = Vend::SupplierBuilder.build(self, payload)
 
       options = {
         headers: headers,
@@ -49,6 +49,45 @@ module Vend
       }
 
       response = self.class.post('/supplier', options)
+
+      validate_response(response)
+    end
+
+    def send_purchase_order(payload)
+      purchase_order_hash = Vend::ConsignmentBuilder.build(self, payload)
+
+      options = {
+        headers: headers,
+        body: purchase_order_hash.to_json
+      }
+
+      response = self.class.post('/consignment', options)
+
+      if response.ok?
+        po_id = response['id']
+        response['line_items'] = []
+        line_items = payload['line_items']
+        line_items.each_with_index do |line_item, index|
+          if line_item['product_id']
+            line_item_payload = {
+              headers: headers,
+              body: {
+                consignment_id: po_id,
+                product_id: line_item['product_id'],
+                count: line_item['quantity'],
+                cost: line_item['quantity'].to_i * line_item['unit_price'].to_i,
+                sequence_number: index
+              }.to_json
+            }
+
+            line_item_response = self.class.post('/consignment_product', line_item_payload)
+            raise "Failed to add line item: #{line_item_response}" unless line_item_response.ok?
+            response['line_items'] << line_item_response.to_h
+          else
+            raise "Missing line item: #{ response }"
+          end
+        end
+      end
 
       validate_response(response)
     end
@@ -77,6 +116,12 @@ module Vend
       response  = retrieve_products(poll_product_timestamp)
 
       (response['products'] || []).map { |product| Vend::ProductBuilder.parse_product(product) }
+    end
+
+    def get_outlets(poll_outlet_timestamp)
+      response  = retrieve_outlets(poll_outlet_timestamp)
+
+      (response['outlets'] || []).map { |outlet| Vend::OutletBuilder.parse_outlet(outlet) }
     end
 
     def get_inventories(poll_inventory_timestamp)
@@ -122,7 +167,7 @@ module Vend
       orders
     end
 
-    def get_purchase_orders(since:)
+    def get_purchase_orders(since)
       options = { headers: headers }
 
       response = self.class.get('/stock_movements', options)
@@ -213,6 +258,25 @@ module Vend
         response
       end
       customers
+    end
+
+    def retrieve_outlets(poll_outlet_timestamp)
+      options = {
+        headers: headers,
+        query: { page_size: 100 }
+      }
+      options[:query][:since] = poll_outlet_timestamp if poll_outlet_timestamp
+
+      outlets = { 'outlets'=>[] }
+      paginate(options) do
+
+        response = self.class.get('/outlets', options)
+        validate_response(response)
+
+        outlets['outlets'] = outlets['outlets'].concat(response['outlets'])
+        response
+      end
+      outlets
     end
 
     def retrieve_products(poll_product_timestamp)

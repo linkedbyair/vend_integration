@@ -34,6 +34,7 @@ module Vend
       def parse_product(product)
         hash = {
                 :id                 => product['id'],
+                :channel            => 'Vend',
                 'name'              => product['name'].split("/")[0],
                 'source_id'         => product['source_id'],
                 'sku'               => product['sku'],
