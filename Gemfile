@@ -11,6 +11,7 @@ end
 
 gem 'httparty'
 gem 'honeybadger'
+gem 'peach'
 
 gem 'endpoint_base', github: 'spree/endpoint_base'
 

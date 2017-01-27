@@ -65,6 +65,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    peach (0.5.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -138,6 +139,7 @@ DEPENDENCIES
   guard-rspec
   honeybadger
   httparty
+  peach
   pry
   pry-byebug
   rack-test
@@ -155,4 +157,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.13.5
+   1.13.6

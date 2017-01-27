@@ -61,13 +61,26 @@ module Vend
         body: purchase_order_hash.to_json
       }
 
-      response = self.class.post('/consignment', options)
+      consignment_id = payload['consignment_id']
+      existing_line_items = []
+
+      response = if consignment_id.nil?
+        self.class.post '/consignment', options
+      else
+        existing_line_items = self.class.get("/consignment_product?consignment_id=#{consignment_id}", headers: headers)["consignment_products"]
+        self.class.get "/consignment/#{consignment_id}", headers: headers
+      end
 
       if response.ok?
         po_id = response['id']
         response['line_items'] = []
+        existing_line_items.peach(3) do |line_item|
+          line_item_response = self.class.delete "/consignment_product/#{line_item['id']}", headers: headers
+          raise "Failed to remove line item: #{line_item_response}" unless line_item_response.ok?
+        end
+
         line_items = payload['line_items']
-        line_items.each_with_index do |line_item, index|
+        line_items.each_with_index.peach(3) do |line_item, index|
           if line_item['product_id']
             line_item_payload = {
               headers: headers,

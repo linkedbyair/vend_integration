@@ -13,10 +13,6 @@ module Vend
       }
     end
 
-    def supplier_id
-      client.find_supplier_id_by_name(payload["vendor"]["name"])
-    end
-
     class << self
       def build(payload, client)
         new(payload, client).to_hash
