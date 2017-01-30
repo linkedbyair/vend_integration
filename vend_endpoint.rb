@@ -64,6 +64,30 @@ class VendEndpoint < EndpointBase::Sinatra::Base
   get_endpoint "products", :get_products
   get_endpoint "purchase_orders", :get_purchase_orders
 
+  post "/get_pending_purchase_orders" do
+    name = "purchase_orders"
+    begin
+      timestamp = "vend_poll_#{name}_timestamp"
+      objects = client.get_pending_purchase_order(@payload['pending_purchase_order']['vend_id'])
+
+      objects.each do |object|
+        add_object "purchase_order", object
+      end
+
+      add_value "purchase_orders", [] if objects.count < 1
+
+      code = 200
+      set_summary "#{objects.size} #{name.pluralize(objects.size)} retrieved from Vend POS." if objects.any?
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
   post '/add_vendor' do
     begin
       response = client.send_supplier(@payload[:vendor])

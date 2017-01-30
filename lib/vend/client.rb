@@ -193,6 +193,25 @@ module Vend
       end
     end
 
+    def get_pending_purchase_order(consignment_id)
+      options = { headers: headers }
+
+      response = self.class.get("/consignment/#{consignment_id}", options)
+      receipts = self.class.get(
+        "/consignment_product",
+        options.merge(query: {consignment_id: consignment_id })
+      )
+
+      #require 'byebug'
+      #byebug
+      validate_response response
+      validate_response receipts
+
+      [Vend::PurchaseOrderBuilder.build(response, self).merge(
+        line_items: receipts.as_json["consignment_products"].sort_by { |line| line["sequence_number"] }
+      )]
+    end
+
     def payment_type_id(payment_method)
       return @payments[payment_method] if @payments
 
