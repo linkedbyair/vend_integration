@@ -4,7 +4,75 @@ require 'endpoint_base'
 Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each &method(:require)
 
 class VendEndpoint < EndpointBase::Sinatra::Base
+  extend GetObjectsEndpoint
   set :logging, true
+  attr_reader :payload
+
+  def add_object(key, value)
+    case value
+    when Hash
+      super key, value.merge(channel: 'Vend')
+    else
+      super
+    end
+  end
+
+  get_endpoint :outlet
+  get_endpoint :product
+  get_endpoint :purchase_order
+  get_endpoint :vendor
+
+  post '/get_purchase_order' do
+    begin
+      code = 200
+      response = client.get_purchase_order(consignment_id: payload['purchase_order']['id'])
+      set_summary "Retrieved Consignment #{response.dig 'data', 'id'} purchase order from Vend"
+      add_object :purchase_order, response['data']
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+
+  post '/add_purchase_order' do
+    begin
+      response = client.send_purchase_order(@payload[:purchase_order])
+      code = 200
+      add_object "purchase_order", Vend::PurchaseOrderBuilder.new(response.to_h, client).to_hash
+      set_summary "Added purchase order #{response["name"]} to Vend"
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+
+  post '/add_vendor' do
+    begin
+      response = client.send_supplier(@payload[:vendor])
+      add_object "vendor", response.as_json
+      set_summary "Added vendor #{response["name"]} to Vend"
+      code = 200
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+=begin
 
   Honeybadger.configure do |config|
     config.api_key = ENV['HONEYBADGER_KEY']
@@ -88,39 +156,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
-  post '/add_vendor' do
-    begin
-      response = client.send_supplier(@payload[:vendor])
-      code = 200
-    rescue VendEndpointError => e
-      code = 500
-      set_summary "Validation error has ocurred: #{e.message}"
-    rescue => e
-      code = 500
-      error_notification(e)
-    end
 
-    process_result code
-  end
-
-  post '/add_purchase_order' do
-    begin
-      response = client.send_purchase_order(@payload[:purchase_order])
-      code = 200
-      add_object "purchase_order", Vend::PurchaseOrderBuilder.new(response.to_h, client).to_hash
-      set_summary "Added purchase order #{response["name"]} to Vend"
-=begin
-    rescue VendEndpointError => e
-      code = 500
-      set_summary "Validation error has ocurred: #{e.message}"
-    rescue => e
-      code = 500
-      error_notification(e)
-=end
-    end
-
-    process_result code
-  end
 
   post %r{(add_customer|update_customer)$} do
     begin
@@ -166,6 +202,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
     process_result code
   end
+=end
 
   def error_notification(error)
     log_exception(error)
@@ -173,6 +210,6 @@ class VendEndpoint < EndpointBase::Sinatra::Base
   end
 
    def client
-     @client ||= Vend::Client.new(@config['vend_site_id'], @config['vend_personal_token'])
+     @client ||= Vend::Client.new(ENV.fetch('VEND_SITE_ID'), ENV.fetch('VEND_PERSONAL_TOKEN'))
    end
 end

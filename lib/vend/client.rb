@@ -1,6 +1,9 @@
+require_relative './poll_client'
+
 module Vend
   class Client
     include ::HTTParty
+    extend ::Vend::PollClient
 
     attr_reader :site_id, :headers
 
@@ -14,6 +17,11 @@ module Vend
 
       self.class.base_uri "https://#{site_id}.vendhq.com/api/"
     end
+
+    poll :vendors => :suppliers
+    poll :outlets
+    poll :purchase_orders
+    poll :products
 
     def send_order(payload)
       order_placed_hash   = Vend::OrderBuilder.order_placed(self, payload)
@@ -68,7 +76,7 @@ module Vend
         self.class.post '/consignment', options
       else
         existing_line_items = self.class.get("/consignment_product?consignment_id=#{consignment_id}", headers: headers)["consignment_products"]
-        self.class.get "/consignment/#{consignment_id}", headers: headers
+        self.class.put "/consignment/#{consignment_id}", options
       end
 
       if response.ok?
@@ -125,13 +133,13 @@ module Vend
       validate_response(response)
     end
 
-    def get_products(poll_product_timestamp)
+    def get_products_X(poll_product_timestamp)
       response  = retrieve_products(poll_product_timestamp)
 
       (response['products'] || []).map { |product| Vend::ProductBuilder.parse_product(product) }
     end
 
-    def get_outlets(poll_outlet_timestamp)
+    def get_outlets_X(poll_outlet_timestamp)
       response  = retrieve_outlets(poll_outlet_timestamp)
 
       (response['outlets'] || []).map { |outlet| Vend::OutletBuilder.parse_outlet(outlet) }
@@ -180,42 +188,20 @@ module Vend
       orders
     end
 
-    def get_purchase_orders(since)
+    def get_purchase_order(consignment_id:)
       options = { headers: headers }
-
-      response = self.class.get('/2.0/consignments', options)
-
-      require 'byebug'
-      byebug
-      validate_response response
-      response
-
-=begin
-      response['stock_movements'].select do |movement|
-        DateTime.parse(movement['updated_at']) > Time.at(since).to_datetime
-      end.map do |movement|
-        Vend::PurchaseOrderBuilder.build(movement, self)
-      end
-=end
-    end
-
-    def get_pending_purchase_order(consignment_id)
-      options = { headers: headers }
-
-      response = self.class.get("/consignment/#{consignment_id}", options)
-      receipts = self.class.get(
-        "/consignment_product",
+      response = self.class.get("/2.0/consignments/#{consignment_id}", options)
+      receipts = self.class.get("/consignment_product",
         options.merge(query: {consignment_id: consignment_id })
       )
 
-      #require 'byebug'
-      #byebug
       validate_response response
       validate_response receipts
-
-      [Vend::PurchaseOrderBuilder.build(response, self).merge(
-        line_items: receipts.as_json["consignment_products"].sort_by { |line| line["sequence_number"] }
-      )]
+      response.to_h.tap do |purchase_order|
+        purchase_order['data'].merge!(
+          line_items: receipts.to_h["consignment_products"].sort_by { |line| line["sequence_number"] }
+        )
+      end
     end
 
     def payment_type_id(payment_method)
