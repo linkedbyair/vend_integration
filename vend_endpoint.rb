@@ -64,17 +64,16 @@ class VendEndpoint < EndpointBase::Sinatra::Base
   get_endpoint "products", :get_products
   get_endpoint "purchase_orders", :get_purchase_orders
 
-  post "/get_pending_purchase_orders" do
+  post "/get_pending_purchase_order" do
     name = "purchase_orders"
     begin
-      timestamp = "vend_poll_#{name}_timestamp"
       objects = client.get_pending_purchase_order(@payload['pending_purchase_order']['vend_id'])
 
       objects.each do |object|
-        add_object "purchase_order", object
+        add_object "pending_purchase_order", object
       end
 
-      add_value "purchase_orders", [] if objects.count < 1
+      add_value "pending_purchase_orders", [] if objects.count < 1
 
       code = 200
       set_summary "#{objects.size} #{name.pluralize(objects.size)} retrieved from Vend POS." if objects.any?
@@ -88,6 +87,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
     process_result code
   end
+
   post '/add_vendor' do
     begin
       response = client.send_supplier(@payload[:vendor])

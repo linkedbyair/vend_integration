@@ -97,7 +97,7 @@ module Vend
             raise "Failed to add line item: #{line_item_response}" unless line_item_response.ok?
             response['line_items'] << line_item_response.to_h
           else
-            raise "Missing line item: #{ response }"
+            # raise "Missing line item: #{ response }"
           end
         end
       end
@@ -183,14 +183,20 @@ module Vend
     def get_purchase_orders(since)
       options = { headers: headers }
 
-      response = self.class.get('/stock_movements', options)
-      validate_response response
+      response = self.class.get('/2.0/consignments', options)
 
+      require 'byebug'
+      byebug
+      validate_response response
+      response
+
+=begin
       response['stock_movements'].select do |movement|
         DateTime.parse(movement['updated_at']) > Time.at(since).to_datetime
       end.map do |movement|
         Vend::PurchaseOrderBuilder.build(movement, self)
       end
+=end
     end
 
     def get_pending_purchase_order(consignment_id)
