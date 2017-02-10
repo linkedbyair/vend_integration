@@ -1,6 +1,10 @@
 
 module Vend
-  ConsignmentBuilder = Struct.new(:client, :payload) do
+  ConsignmentBuilder = Struct.new(:payload) do
+    def self.build(payload)
+      new(payload).to_hash
+    end
+
     def to_hash
       {
         name: "[#{payload['id']}] #{payload['name']}".squish,
@@ -12,12 +16,6 @@ module Vend
         type: "SUPPLIER",
         status: payload['status']
       }
-    end
-
-    class << self
-      def build(payload, client)
-        new(payload, client).to_hash
-      end
     end
   end
 end

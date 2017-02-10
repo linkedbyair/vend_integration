@@ -1,4 +1,5 @@
 require 'httparty'
+require 'peach'
 require_relative './poll_client'
 
 module Vend
@@ -21,7 +22,7 @@ module Vend
 
     poll :vendors => :suppliers
     poll :outlets
-    poll :purchase_orders
+    poll :purchase_orders => :consignments
     poll :products
 
     def send_order(payload)
@@ -63,7 +64,7 @@ module Vend
     end
 
     def send_purchase_order(payload)
-      purchase_order_hash = Vend::ConsignmentBuilder.build(self, payload)
+      purchase_order_hash = Vend::ConsignmentBuilder.build(payload)
 
       options = {
         headers: headers,
@@ -106,7 +107,7 @@ module Vend
             raise "Failed to add line item: #{line_item_response}" unless line_item_response.ok?
             response['line_items'] << line_item_response.to_h
           else
-            # raise "Missing line item: #{ response }"
+            raise "Missing line item: #{ line_item }"
           end
         end
       end
