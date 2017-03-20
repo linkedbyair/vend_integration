@@ -10,9 +10,21 @@ module GetObjectsEndpoint
         set_summary "Retrieved #{objects.size} #{name.pluralize} from Vend"
         add_parameter :max_version, response['version']['max']
         if objects.any?
-          objects.each do |object|
-            add_object name, object
-          end
+            objects.each do |object|              
+            #flip between transfers, purchase orders & stocktake .... vend only has one exit point 
+                   
+                if name == 'purchase_order'                 
+                   if   object['type'] == 'OUTLET' 
+                        add_object 'transfer_order', object
+                    elsif object['type'] == 'SUPPLIER' 
+                          add_object 'purchase_order', object
+                        elsif object['type'] == 'STOCKTAKE'
+                              add_object 'inventory_adjustment', object 
+                    end
+                else 
+                  add_object name, object
+                end
+            end
         else
           add_value name.pluralize, []
         end

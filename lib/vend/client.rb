@@ -64,6 +64,7 @@ module Vend
     end
 
     def send_purchase_order(payload)
+      
       purchase_order_hash = Vend::ConsignmentBuilder.build(payload)
 
       options = {
@@ -191,19 +192,25 @@ module Vend
     end
 
     def get_purchase_order(consignment_id:)
+      
       options = { headers: headers }
       response = self.class.get("/2.0/consignments/#{consignment_id}", options)
-      receipts = self.class.get("/consignment_product",
-        options.merge(query: {consignment_id: consignment_id })
-      )
+      
+      if response.ok?        
+          
+          receipts = self.class.get("/consignment_product",
+          options.merge(query: {consignment_id: consignment_id })    )      
 
-      validate_response response
-      validate_response receipts
-      response.to_h.tap do |purchase_order|
-        purchase_order['data'].merge!(
-          line_items: receipts.to_h["consignment_products"].sort_by { |line| line["sequence_number"] }
-        )
-      end
+          validate_response response
+          validate_response receipts
+            response.to_h.tap do |purchase_order|
+              purchase_order['data'].merge!(
+                line_items: receipts.to_h["consignment_products"].sort_by { |line| line["sequence_number"] }
+              )
+            end
+        else
+             raise "Warning -- Vend consignment missing id: #{consignment_id}"         
+        end
     end
 
     def payment_type_id(payment_method)

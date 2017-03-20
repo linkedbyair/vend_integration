@@ -4,6 +4,7 @@ module Vend
     attr_reader :payload, :client
 
     def initialize(payload, client)
+      
       @payload = payload
       @client = client
     end
@@ -15,7 +16,12 @@ module Vend
     end
 
     def location
+      
       client.find_outlet_by_id(payload["outlet_id"])
+    end
+
+    def source_location
+      client.find_outlet_by_id(payload["source_outlet_id"])
     end
 
     def vendor

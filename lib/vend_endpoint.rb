@@ -37,11 +37,14 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post '/get_purchase_order' do
     begin
+      
       code = 200
       response = client.get_purchase_order(consignment_id: payload['purchase_order']['id'])
+      
       set_summary "Retrieved Consignment #{response.dig 'data', 'id'} purchase order from Vend"
-      add_object :purchase_order, response['data']
-    rescue VendEndpointError => e
+      add_object :purchase_order, response['data']      
+        
+  rescue VendEndpointError => e
       code = 500
       set_summary "Validation error has ocurred: #{e.message}"
     rescue => e
@@ -52,12 +55,55 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
+  post '/get_transfer_order' do
+    begin
+      
+      code = 200
+      response = client.get_purchase_order(consignment_id: payload['transfer_order']['id'])
+      
+      set_summary "Retrieved Consignment #{response.dig 'data', 'id'} transfer order from Vend"
+      add_object :transfer_order, response['data']      
+        
+  rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+
+    post '/get_inventory_counts' do
+    begin
+      
+      code = 200
+      response = client.get_purchase_order(consignment_id: payload['inventory_adjustment']['id'])
+      
+      set_summary "Retrieved inventory count #{response.dig 'data', 'id'}  from Vend"
+      add_object :inventory_adjustment, response['data']      
+        
+  rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+
+
   post '/add_purchase_order' do
     begin
+      
       response = client.send_purchase_order(@payload[:purchase_order])
       code = 200
       add_object "purchase_order", Vend::PurchaseOrderBuilder.new(response.to_h, client).to_hash
       set_summary "Added purchase order #{response["name"]} to Vend"
+          
     rescue VendEndpointError => e
       code = 500
       set_summary "Validation error has ocurred: #{e.message}"
@@ -68,6 +114,25 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
     process_result code
   end
+
+  post '/add_transfer_order' do
+    begin      
+      response = client.send_purchase_order(@payload[:transfer_order])
+      code = 200
+      add_object "transfer_order", Vend::PurchaseOrderBuilder.new(response.to_h, client).to_hash
+      set_summary "Added transfer order #{response["name"]} to Vend"
+          
+    rescue VendEndpointError => e
+      code = 500
+      set_summary "Validation error has ocurred: #{e.message}"
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+
+    process_result code
+  end
+  
 
   post '/add_vendor' do
     begin
