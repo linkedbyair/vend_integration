@@ -24,6 +24,7 @@ module Vend
     poll :outlets
     poll :purchase_orders => :consignments
     poll :products
+    poll :register_sales => :sales
 
     def send_order(payload)
       order_placed_hash   = Vend::OrderBuilder.order_placed(self, payload)
@@ -71,6 +72,13 @@ module Vend
         headers: headers,
         body: purchase_order_hash.to_json
       }
+      
+      order_type =payload["type"]
+      #trap this error, critical as it will create a corrupt po in Vend
+      if order_type == 'SUPPLIER' && payload["supplier_id"].nil?
+         vendorname=payload['vendor']['name']
+         raise "Supplier  #{vendorname} not found in Vend .. Please add first!"
+      end
 
       consignment_id = payload['consignment_id']
       existing_line_items = []
@@ -92,6 +100,7 @@ module Vend
 
         line_items = payload['line_items']
         line_items.each_with_index.peach(3) do |line_item, index|
+          
           if line_item['product_id']
             line_item_payload = {
               headers: headers,
@@ -108,7 +117,7 @@ module Vend
             raise "Failed to add line item: #{line_item_response}" unless line_item_response.ok?
             response['line_items'] << line_item_response.to_h
           else
-            raise "Missing line item: #{ line_item }"
+            raise "Missing line item: #{ line_item } ,please add this item to vend!"
           end
         end
       end
@@ -209,7 +218,8 @@ module Vend
               )
             end
         else
-             raise "Warning -- Vend consignment missing id: #{consignment_id}"         
+             #api does not return canncelled po's
+             raise "Warning -- Vend consignment missing id: #{consignment_id} if po is cancelled in vend its ok"         
         end
     end
 

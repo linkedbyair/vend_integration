@@ -34,6 +34,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
   get_endpoint :product
   get_endpoint :purchase_order
   get_endpoint :vendor
+  get_endpoint :register_sale
 
   post '/get_purchase_order' do
     begin
