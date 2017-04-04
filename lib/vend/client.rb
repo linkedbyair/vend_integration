@@ -108,7 +108,7 @@ module Vend
                 consignment_id: po_id,
                 product_id: line_item['product_id'],
                 count: line_item['quantity'],
-                cost: line_item['quantity'].to_i * line_item['unit_price'].to_i,
+                cost: line_item['unit_price'].to_i,
                 sequence_number: index
               }.to_json
             }
