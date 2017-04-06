@@ -10,21 +10,26 @@ module GetObjectsEndpoint
         set_summary "Retrieved #{objects.size} #{name.pluralize} from Vend"
         add_parameter :max_version, response['version']['max']
         if objects.any?
-            objects.each do |object|              
-            #flip between transfers, purchase orders & stocktake .... vend only has one exit point 
-                if name == 'purchase_order'                   
-                   po_type =object['type']                
+            objects.each_with_index do |object, index|
+            #flip between transfers, purchase orders & stocktake .... vend only has one exit point
+                if name == 'purchase_order'
+                   po_type =object['type']
                    case   po_type
-                     when 'OUTLET' 
+                     when 'OUTLET'
                           add_object 'transfer_order', object
-                     when 'SUPPLIER' 
+                     when 'SUPPLIER'
                           add_object 'purchase_order', object
                      when 'STOCKTAKE'
-                          add_object 'inventory_adjustment', object 
+                          add_object 'inventory_adjustment', object
                      end
-                else 
-                  add_object name, object
-                end
+                else
+                  #if page is full request another poll request
+                  if index== objects.size-1 && objects.size >=25
+                    add_object name, object.merge({poll: 'true'})
+                  else
+                    add_object name, object
+                  end
+              end
             end
         else
           add_value name.pluralize, []
