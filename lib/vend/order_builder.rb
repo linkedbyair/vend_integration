@@ -109,7 +109,7 @@ module Vend
         (payload['payments'] || []).each_with_index.map do |payment, i|
           {
             'id'                       => nil,
-            'retailer_payment_type_id' => client.payment_type_id(payment['payment_method']),
+            'retailer_payment_type_id' => client.payment_type_id('x' + payment['payment_method']),
             'payment_date'             => payload['placed_on'],
             'amount'                   => payment['amount'].to_f
           }
