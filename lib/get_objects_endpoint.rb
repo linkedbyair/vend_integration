@@ -24,7 +24,7 @@ module GetObjectsEndpoint
                      end
                 else
                   #if page is full request another poll request
-                  if index== objects.size-1 && objects.size >=25
+                  if index== objects.size-1 && objects.size >= 24
                     add_object name, object.merge({poll: 'true'})
                   else
                     add_object name, object
