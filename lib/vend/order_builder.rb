@@ -35,6 +35,12 @@ module Vend
           'discount' == adjustment['name']
         end.sum do |adjustment|
           -adjustment['value']
+        end + line_item_promo_totals(payload)
+      end
+
+      def line_item_promo_totals(payload)
+        (payload['line_items'] || []).sum do |line_item|
+          line_item['promo_total'].to_f
         end
       end
 
@@ -42,11 +48,12 @@ module Vend
       def products_of_order(client, payload)
         (payload['line_items'] || []).each_with_index.map do |line_item, i|
           quantity = line_item['quantity'].to_i
+          promo_per_unit = line_item['promo_total'].to_f * -1 / quantity
           {
             'product_id' => line_item['product_id'].to_s,
             'quantity'   => line_item['quantity'],
-            'price'      => line_item['price'].to_f,
-            'discount'   => line_item['promo_total'].to_f * -1 / quantity,
+            'price'      => line_item['price'].to_f - promo_per_unit,
+            'discount'   => promo_per_unit,
             'tax'        => line_item['additional_tax_total'].to_f / quantity,
             'tax_total'  => line_item['additional_tax_total'].to_f,
             'attributes' => [
