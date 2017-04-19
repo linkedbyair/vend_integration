@@ -202,11 +202,11 @@ module Vend
 
       def build_customer_based_on_order(payload)
         {
-          'firstname'        => payload['billing_address']['firstname'],
-          'lastname'         => payload['billing_address']['lastname'],
+          'firstname'        => payload['shipping_address']['firstname'],
+          'lastname'         => payload['shipping_address']['lastname'],
           'email'            => payload['email'],
           'shipping_address' => payload['shipping_address'],
-          'billing_address'  => payload['billing_address']
+          'billing_address'  => payload['shipping_address']
         }
       end
 
