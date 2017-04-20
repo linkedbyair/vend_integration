@@ -17,6 +17,8 @@ module Vend
             'register_sale_payments' => payments(client, payload)
         }
 
+        hash.merge!('id' => payload['vend_id']) if payload['vend_id'].present?
+
         products = products_of_order(client, payload)
 
         discount_total = discount_total(payload).to_f
