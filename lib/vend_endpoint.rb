@@ -40,11 +40,11 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     begin
       
       code = 200
-      response = client.get_purchase_order(consignment_id: payload['purchase_order']['id'])
-      
-      set_summary "Retrieved Consignment #{response.dig 'data', 'id'} purchase order from Vend"
-      add_object :purchase_order, response['data']      
-        
+      response = client.get_purchase_order(consignment_id: payload['purchase_order']['id'],name: payload['purchase_order']['name'])
+      if response.present?
+          set_summary "Retrieved Consignment #{response.dig 'data', 'id'} purchase order from Vend"
+          add_object :purchase_order, response['data']      
+      end  
   rescue VendEndpointError => e
       code = 500
       set_summary "Validation error has ocurred: #{e.message}"
@@ -60,11 +60,11 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     begin
       
       code = 200
-      response = client.get_purchase_order(consignment_id: payload['transfer_order']['id'])
-      
-      set_summary "Retrieved Consignment #{response.dig 'data', 'id'} transfer order from Vend"
-      add_object :transfer_order, response['data']      
-        
+      response = client.get_purchase_order(consignment_id: payload['transfer_order']['id'],name: payload['transfer_order']['name'])
+       if response.present?
+          set_summary "Retrieved Consignment #{response.dig 'data', 'id'} transfer order from Vend"
+          add_object :transfer_order, response['data']      
+      end   
   rescue VendEndpointError => e
       code = 500
       set_summary "Validation error has ocurred: #{e.message}"
@@ -151,13 +151,18 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
     process_result code
   end
+=begin
 
-  post '/add_order' do
+  Honeybadger.configure do |config|
+    config.api_key = ENV['HONEYBADGER_KEY']
+    config.environment_name = ENV['RACK_ENV']
+  end
+
+  post %r{(add_order|update_order)$} do
     begin
       @payload[:order][:register] = @config['vend_register']
       response                    = client.send_order(@payload[:order])
       code                        = 200
-      add_object 'order', response.as_json['register_sale']
       set_summary "The order #{@payload[:order][:id]} was sent to Vend POS."
     rescue VendEndpointError => e
       code = 500
@@ -168,12 +173,6 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     end
 
     process_result code
-  end
-=begin
-
-  Honeybadger.configure do |config|
-    config.api_key = ENV['HONEYBADGER_KEY']
-    config.environment_name = ENV['RACK_ENV']
   end
 
   def self.get_endpoint(name, method, path = nil)
