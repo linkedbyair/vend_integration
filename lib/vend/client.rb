@@ -200,7 +200,7 @@ module Vend
       orders
     end
 
-    def get_purchase_order(consignment_id:)
+    def get_purchase_order(consignment_id:,name:)
       
       options = { headers: headers }
       response = self.class.get("/2.0/consignments/#{consignment_id}", options)
@@ -208,8 +208,7 @@ module Vend
       if response.ok?        
           
           receipts = self.class.get("/consignment_product",
-          options.merge(query: {consignment_id: consignment_id })    )      
-
+          options.merge(query: {consignment_id: consignment_id }))  
           validate_response response
           validate_response receipts
             response.to_h.tap do |purchase_order|
@@ -218,9 +217,12 @@ module Vend
               )
             end
         else
-             #api does not return canncelled po's
-             raise "Warning -- Vend consignment missing id: #{consignment_id} if po is cancelled in vend its ok"         
-        end
+             #api does not return cancelled po's
+             #ignore complete orders errors they always get cancelled ... its ok
+             if !name.to_s.include?('[Continued]')
+                 raise "Warning -- Vend consignment missing id: #{consignment_id} if po is cancelled in vend its ok"         
+             end  
+      end
     end
 
     def payment_type_id(payment_method)
