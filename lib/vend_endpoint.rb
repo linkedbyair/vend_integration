@@ -151,14 +151,8 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
     process_result code
   end
-=begin
 
-  Honeybadger.configure do |config|
-    config.api_key = ENV['HONEYBADGER_KEY']
-    config.environment_name = ENV['RACK_ENV']
-  end
-
-  post %r{(add_order|update_order)$} do
+  post '/add_order' do
     begin
       @payload[:order][:register] = @config['vend_register']
       response                    = client.send_order(@payload[:order])
@@ -173,6 +167,13 @@ class VendEndpoint < EndpointBase::Sinatra::Base
     end
 
     process_result code
+  end
+
+=begin
+
+  Honeybadger.configure do |config|
+    config.api_key = ENV['HONEYBADGER_KEY']
+    config.environment_name = ENV['RACK_ENV']
   end
 
   def self.get_endpoint(name, method, path = nil)
