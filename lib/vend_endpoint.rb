@@ -157,6 +157,7 @@ class VendEndpoint < EndpointBase::Sinatra::Base
       @payload[:order][:register] = @config['vend_register']
       response                    = client.send_order(@payload[:order])
       code                        = 200
+      add_object 'order', response.as_json['register_sale']
       set_summary "The order #{@payload[:order][:id]} was sent to Vend POS."
     rescue VendEndpointError => e
       code = 500
