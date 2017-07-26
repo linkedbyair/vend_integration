@@ -217,11 +217,8 @@ module Vend
               )
             end
         else
-             #api does not return cancelled po's
-             #ignore complete orders errors they always get cancelled ... its ok
-             if !name.to_s.include?('[Continued]')
-                 raise "Warning -- Vend consignment missing id: #{consignment_id} if po is cancelled in vend its ok"         
-             end  
+             #api does not return cancelled po'sco
+             #ignore the errors... its ok           
       end
     end
 
