@@ -23,3 +23,5 @@ public/assets
 
 # IDE
 .idea/
+
+.env
