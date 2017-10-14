@@ -41,18 +41,25 @@ class VendEndpoint < EndpointBase::Sinatra::Base
   post '/get_purchase_order' do
     begin
       code = 200
-      response = client.get_purchase_order(consignment_id: payload['purchase_order']['id'], name: payload['purchase_order']['name'])
+      consignment_id = payload['purchase_order']['id']
+      name = payload['purchase_order']['name']
+      response = client.get_purchase_order(consignment_id: consignment_id,
+                                           name: name)
 
       if response.present? &&
-        response != 'CANCELLED'
+         response != 'CANCELLED'
         set_summary "Retrieved Consignment #{response.dig 'data', 'id'} purchase order from Vend"
         add_object :purchase_order, response['data']
       elsif response == 'CANCELLED'
-        vendobject = ExternalReference.purchase_orders.find_by_external_id(vend_id: consignment_id)&.object['vend']
+        vendobject = ExternalReference.purchase_orders
+                                      .find_by_external_id(vend_id: consignment_id)
+                                      &.object['vend']
         vendobject['status'] = response
-        ExternalReference.record :purchase_order, name, vendobject, vend_id: consignment_id
+        ExternalReference.record :purchase_order,
+                                 name,
+                                 vendobject,
+                                 vend_id: consignment_id
       end
-
     rescue VendEndpointError => e
       code = 500
       set_summary "Validation error has ocurred: #{e.message}"
@@ -67,16 +74,24 @@ class VendEndpoint < EndpointBase::Sinatra::Base
   post '/get_transfer_order' do
     begin
       code = 200
-      response = client.get_purchase_order(consignment_id: payload['transfer_order']['id'], name: payload['transfer_order']['name'])
+      consignment_id = payload['transfer_order']['id']
+      name = payload['transfer_order']['name']
+      response = client.get_purchase_order(consignment_id: consignment_id,
+                                           name: name)
 
       if response.present? &&
-        response != 'CANCELLED'
+         response != 'CANCELLED'
         set_summary "Retrieved Consignment #{response.dig 'data', 'id'} transfer order from Vend"
         add_object :transfer_order, response['data']
       elsif response == 'CANCELLED'
-        vendobject = ExternalReference.transfer_orders.find_by_external_id(vend_id: consignment_id)&.object['vend']
+        vendobject = ExternalReference.transfer_orders
+                                      .find_by_external_id(vend_id: consignment_id)
+                                      &.object['vend']
         vendobject['status'] = response
-        ExternalReference.record :transfer_order, name, vendobject, vend_id: consignment_id
+        ExternalReference.record :transfer_order,
+                                 name,
+                                 vendobject,
+                                 vend_id: consignment_id
 
       end
     rescue VendEndpointError => e
