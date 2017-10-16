@@ -86,12 +86,14 @@ module Vend
 
       response = if consignment_id.nil?
                    self.class.post '/consignment', options
+                 elsif payload['status'] == 'CANCELLED'
+                   self.class.delete "/consignment/#{consignment_id}", options
                  else
                    existing_line_items = self.class.get("/consignment_product?consignment_id=#{consignment_id}", headers: headers)['consignment_products']
                    self.class.put "/consignment/#{consignment_id}", options
                  end
 
-      if response.ok?
+      if response.ok? && payload['status'] != 'CANCELLED'
         po_id = response['id']
         response['line_items'] = []
         existing_line_items.peach(3) do |line_item|
