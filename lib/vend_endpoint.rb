@@ -92,7 +92,6 @@ class VendEndpoint < EndpointBase::Sinatra::Base
                                  name,
                                  vendobject,
                                  vend_id: consignment_id
-
       end
     rescue VendEndpointError => e
       code = 500
@@ -125,10 +124,13 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post '/add_purchase_order' do
     begin
-      response = client.send_purchase_order(@payload[:purchase_order])
+      payload = @payload[:purchase_order]
+      response = client.send_purchase_order(payload)
       code = 200
-      add_object 'purchase_order', Vend::PurchaseOrderBuilder.new(response.to_h, client).to_hash
-      set_summary "Added purchase order #{response['name']} to Vend"
+      if payload['status'] != 'CANCELLED'
+        add_object 'purchase_order', Vend::PurchaseOrderBuilder.new(response.to_h, client).to_hash
+        set_summary "Added purchase order #{response['name']} to Vend"
+      end
     rescue VendEndpointError => e
       code = 500
       set_summary "Validation error has ocurred: #{e.message}"
@@ -142,10 +144,13 @@ class VendEndpoint < EndpointBase::Sinatra::Base
 
   post '/add_transfer_order' do
     begin
-      response = client.send_purchase_order(@payload[:transfer_order])
+      payload = @payload[:transfer_order]
+      response = client.send_purchase_order(payload)
       code = 200
-      add_object 'transfer_order', Vend::PurchaseOrderBuilder.new(response.to_h, client).to_hash
-      set_summary "Added transfer order #{response['name']} to Vend"
+      if payload['status'] != 'CANCELLED'
+        add_object 'transfer_order', Vend::PurchaseOrderBuilder.new(response.to_h, client).to_hash
+        set_summary "Added transfer order #{response['name']} to Vend"
+      end
     rescue VendEndpointError => e
       code = 500
       set_summary "Validation error has ocurred: #{e.message}"
