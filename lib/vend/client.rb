@@ -204,8 +204,8 @@ module Vend
     def get_purchase_order(consignment_id:, name:)
       options = { headers: headers }
       response = self.class.get("/2.0/consignments/#{consignment_id}", options)
-
-      if response.ok?
+      status = response['data']['status']
+      if response.ok? && status != 'CANCELLED'
         receipts = self.class.get('/consignment_product',
                                   options.merge(query: { consignment_id: consignment_id }))
         validate_response response
@@ -216,9 +216,8 @@ module Vend
                                 .sort_by { |line| line['sequence_number'] }
           )
         end
-      elsif response['errors']['global']&.first
-                                        &.to_s&.include?('Could not find entity')
-        'CANCELLED'
+      else
+        response
       end
     end
 

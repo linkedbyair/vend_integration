@@ -16,7 +16,7 @@ require_relative './get_objects_endpoint'
 class VendEndpointError < StandardError; end
 
 class VendEndpoint < EndpointBase::Sinatra::Base
-  VESRION = '0.0.1'
+  VESRION = '0.0.1'.freeze
   extend GetObjectsEndpoint
 
   set :logging, true
@@ -45,20 +45,9 @@ class VendEndpoint < EndpointBase::Sinatra::Base
       name = payload['purchase_order']['name']
       response = client.get_purchase_order(consignment_id: consignment_id,
                                            name: name)
-
-      if response.present? &&
-         response != 'CANCELLED'
+      if response.present?
         set_summary "Retrieved Consignment #{response.dig 'data', 'id'} purchase order from Vend"
         add_object :purchase_order, response['data']
-      elsif response == 'CANCELLED'
-        vendobject = ExternalReference.purchase_orders
-                                      .find_by_external_id(vend_id: consignment_id)
-                                      &.object['vend']
-        vendobject['status'] = response
-        ExternalReference.record :purchase_order,
-                                 name,
-                                 vendobject,
-                                 vend_id: consignment_id
       end
     rescue VendEndpointError => e
       code = 500
@@ -78,20 +67,9 @@ class VendEndpoint < EndpointBase::Sinatra::Base
       name = payload['transfer_order']['name']
       response = client.get_purchase_order(consignment_id: consignment_id,
                                            name: name)
-
-      if response.present? &&
-         response != 'CANCELLED'
+      if response.present?
         set_summary "Retrieved Consignment #{response.dig 'data', 'id'} transfer order from Vend"
         add_object :transfer_order, response['data']
-      elsif response == 'CANCELLED'
-        vendobject = ExternalReference.transfer_orders
-                                      .find_by_external_id(vend_id: consignment_id)
-                                      &.object['vend']
-        vendobject['status'] = response
-        ExternalReference.record :transfer_order,
-                                 name,
-                                 vendobject,
-                                 vend_id: consignment_id
       end
     rescue VendEndpointError => e
       code = 500
