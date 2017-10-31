@@ -5,38 +5,59 @@ module Vend
     class << self
       def order_placed(client, payload)
         hash = {
-            'id'                     => payload['id'],
-            'register_id'            => client.register_id(payload['register']),
+            'register_id'            => ENV.fetch('VEND_ECOMM_REGISTER_ID'),
             'customer_id'            => customer_id(client, payload),
             'sale_date'              => payload['placed_on'],
-            'total_price'            => (payload['totals']['item'].to_f + (payload['totals']['discount'].to_f*-1) + payload['totals']['shipping'].to_f),
+            'total_price'            => payload['totals']['order'].to_f - payload['totals']['tax'].to_f,
             'total_tax'              => payload['totals']['tax'].to_f,
             'tax_name'               => 'TAX',
             'status'                 => payload['status'],
-            'invoice_number'         => payload['invoice_number'] || payload['id'],
+            'invoice_number'         => payload['id'],
             'note'                   => nil,
             'register_sale_payments' => payments(client, payload)
         }
 
+        hash.merge!('id' => payload['vend_id']) if payload['vend_id'].present?
+
         products = products_of_order(client, payload)
-        products << add_discount_product(payload, hash['register_id'], client) if payload['totals']['discount']
+
+        discount_total = discount_total(payload).to_f
+        products << add_discount_product(payload, hash['register_id'], client) unless discount_total.zero?
 
         shipping = add_shipping_product(payload, hash['register_id'], client) if payload['totals']['shipping']
         products << shipping if shipping
 
         hash['register_sale_products']= products
 
-        hash[:id] = payload['id'] if payload.has_key?('id')
         hash
+      end
+
+      def discount_total(payload)
+        payload['adjustments'].select do |adjustment|
+          'discount' == adjustment['name']
+        end.sum do |adjustment|
+          -adjustment['value']
+        end + line_item_promo_totals(payload)
+      end
+
+      def line_item_promo_totals(payload)
+        (payload['line_items'] || []).sum do |line_item|
+          line_item['promo_total'].to_f
+        end
       end
 
 
       def products_of_order(client, payload)
         (payload['line_items'] || []).each_with_index.map do |line_item, i|
+          quantity = line_item['quantity'].to_i
+          promo_per_unit = line_item['promo_total'].to_f * -1 / quantity
           {
             'product_id' => line_item['product_id'].to_s,
             'quantity'   => line_item['quantity'],
-            'price'      => line_item['price'].to_f,
+            'price'      => line_item['price'].to_f - promo_per_unit,
+            'discount'   => promo_per_unit,
+            'tax'        => line_item['additional_tax_total'].to_f / quantity,
+            'tax_total'  => line_item['additional_tax_total'].to_f,
             'attributes' => [
                     {
                         'name'  => 'line_note',
@@ -49,19 +70,25 @@ module Vend
       #Yeah, weird, but it's how Vend treat discount
       #https://developers.vendhq.com/documentation/api/0.x/register-sales.html#discounts
       def add_discount_product(payload, register_id, client)
+        discount_total = self.discount_total(payload)
+
         {
           'product_id'=> client.get_discount_product,
-          'register_id'=> register_id,
+          'register_id'=> ENV.fetch('VEND_ECOMM_REGISTER_ID'),
           'sequence'=> '0',
           'handle'=> 'vend-discount',
           'sku'=> 'vend-discount',
           'name'=> 'Discount',
           'quantity'=> -1,
-          'price'=> payload['totals']['discount'],
+          'price'=> discount_total,
           'price_set'=> 1,
           'discount'=> 0,
           'loyalty_value'=> 0,
-          'price_total'=> payload['totals']['discount']*-1,
+          'tax' => 0,
+          'tax_id' => nil,
+          'tax_rate' => 0,
+          'tax_total' => 0,
+          'price_total'=> -discount_total,
           'display_retail_price_tax_inclusive'=> '1',
           'status'=> 'CONFIRMED'
         }
@@ -72,7 +99,7 @@ module Vend
 
         {
           'product_id'=> client.get_shipping_product,
-          'register_id'=> register_id,
+          'register_id'=> ENV.fetch('VEND_ECOMM_REGISTER_ID'),
           'sequence'=> '0',
           'handle'=> 'shipping',
           'sku'=> 'shipping',
@@ -90,8 +117,8 @@ module Vend
       def payments(client, payload)
         (payload['payments'] || []).each_with_index.map do |payment, i|
           {
-            'id'                       => payment['id'] || Digest::MD5.hexdigest(payload['id'].to_s).to_s,
-            'retailer_payment_type_id' => client.payment_type_id(payment['payment_method']),
+            'id'                       => nil,
+            'retailer_payment_type_id' => client.payment_type_id('x' + payment['payment_method']),
             'payment_date'             => payload['placed_on'],
             'amount'                   => payment['amount'].to_f
           }
@@ -177,11 +204,11 @@ module Vend
 
       def build_customer_based_on_order(payload)
         {
-          'firstname'        => payload['billing_address']['firstname'],
-          'lastname'         => payload['billing_address']['lastname'],
+          'firstname'        => payload['shipping_address']['firstname'],
+          'lastname'         => payload['shipping_address']['lastname'],
           'email'            => payload['email'],
           'shipping_address' => payload['shipping_address'],
-          'billing_address'  => payload['billing_address']
+          'billing_address'  => payload['shipping_address']
         }
       end
 
